@@ -4,9 +4,6 @@
 #   Empresa: EZTech Tecnologia
 #			 http://www.eztech.ind.br/
 #
-#	Autor  : Otavio Venezian Junior
-#			 otavio.venezian@sinapseautomacao.com.br
-#
 #   Data   : 31/10/2012  
 #
 # Observacoes: 
