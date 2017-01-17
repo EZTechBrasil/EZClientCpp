@@ -1,0 +1,574 @@
+
+/*****************************************************************
+ *
+ * Copyright (C) 2009-2012 EZTech Tecnologia e Automação Ltda.
+ * All rights reserved.
+ *
+ * Created 01/06/2010
+ *
+ * File: Definitions.h
+ * Desc: Public definitions header file
+ *
+ * Visual SourceSafe details
+ * =========================
+ *
+ * $Header: /EZController.root/EZController/COMMON/Definitions.h 1     17/04/07 13:55 Kelvin Ussher $
+ * $History: Definitions.h $
+ *
+ * *****************  Version 1  *****************
+ * User: Kelvin Ussher Date: 17/04/11   Time: 13:55
+ * Created in $/EZController.root/EZController/COMMON
+ *
+ *
+ ******************************************************************/
+
+#define NULL_ID 0xFFFFFFFF
+
+enum EClients
+{
+	SERVER_CLIENT = 0 ,
+	POS_CLIENT = 1 ,
+	DB_CLIENT = 100 ,
+	DRIVER_CLIENT = 200
+} ;
+
+typedef enum TClientType
+{
+	SIMPLE_CLIENT_TYPE = 0x00 ,
+	CALLS_CLIENT_TYPE = 0x01 ,
+	EVENTS_CLIENT_TYPE = 0x02 ,
+	DB_CLIENT_TYPE = 0x04
+} TClientType ;
+
+typedef enum TObjectType
+{
+	UNKNOWN_OBJECT ,
+	DB_OBJECT ,
+	EVENTS_OBJECT ,
+	CLIENT_OBJECT ,
+	PUMP_OBJECT ,
+	HOSE_OBJECT ,
+	GRADE_OBJECT ,
+	TANK_OBJECT ,
+	PORT_OBJECT ,
+	DELIVERY_OBJECT ,
+	ATTENDANT_OBJECT ,
+	PUMP_DRV_OBJECT ,
+	HOSE_DRV_OBJECT ,
+	GRADE_DRV_OBJECT ,
+	TANK_DRV_OBJECT ,
+	PORT_DRV_OBJECT ,
+	ZIGBEE_OBJECT ,
+	EZMOD_OBJECT ,
+	CARD_CLIENT_OBJECT ,
+	CARD_READ_OBJECT ,
+	LAST_OBJECT // must be last
+} TObjectType ;
+
+typedef enum TZigBeeDevice
+{
+	UNKNOWN_ZBDEVICE ,
+	IRB_ZBDEVICE ,
+	MTF_ZBDEVICE ,
+	OTHER_ZBDEVICE ,
+	TRM_ZBDEVICE ,
+	EZREMOTE_WIRELESS_ZBDEVICE ,
+	EZREMOTE_SLOT1_ZBDEVICE ,
+	EZREMOTE_SLOT2_ZBDEVICE ,
+	EZREMOTE_SLOT3_ZBDEVICE ,
+	EZREMOTE_SLOT4_ZBDEVICE ,
+	INVALID_ZBDEVICE ,
+} TZigBeeDevice ;
+
+typedef enum TPriceControl
+{
+	UNKNOWN_PRICE_CONTROL ,
+	REMOTE_PRICE_CONTROL ,
+	LOCAL_PRICE_CONTROL ,
+} TPriceControl ;
+
+typedef enum TPriceType
+{
+	UNKNOW_PRICE_TYPE ,
+	FIXED_PRICE_TYPE ,
+	DISCOUNT_PRICE_TYPE ,
+	SURCHARGE_PRICE_TYPE ,
+} TPriceType ;
+
+typedef enum TDurationType
+{
+	UNKNOWN_DURATION_TYPE ,
+	SINGLE_DURATION_TYPE ,
+	MULTIPLE_DURATION_TYPE ,
+} TDurationType ;
+
+typedef enum TPumpReserve
+{
+	UNKNOWN_RESERVE ,
+	NOT_RESERVED  ,
+	RESERVED_FOR_PREPAY ,
+	AUTHED_FOR_PREPAY ,
+	RESERVED_FOR_PREAUTH ,
+	AUTHED_FOR_PREAUTH ,
+	RESERVED_FOR_CTF ,
+	AUTHED_FOR_CTF
+
+} TPumpReserve ;
+
+typedef enum TDisplayFormat
+{
+	UNKNOWN_DISPLAY_FORMAT ,
+	PUMP_DISPLAY_4_3 ,		// 9.999
+	PUMP_DISPLAY_4_2 ,		// 99.99
+	PUMP_DISPLAY_4_1 ,		// 999.9
+	PUMP_DISPLAY_4_0 ,		// 9999
+	PUMP_DISPLAY_5_3 ,		// 99.999
+	PUMP_DISPLAY_5_2 ,		// 999.99
+	PUMP_DISPLAY_5_1 ,		// 9999.9
+	PUMP_DISPLAY_5_0 ,		// 99999
+	PUMP_DISPLAY_6_3 ,		// 999.999
+	PUMP_DISPLAY_6_2 ,		// 9999.99
+	PUMP_DISPLAY_6_1 ,		// 99999.9
+	PUMP_DISPLAY_6_0 ,		// 999999
+	PUMP_DISPLAY_4_N1 ,		// 99990
+	PUMP_DISPLAY_4_N2 ,		// 999900
+	PUMP_DISPLAY_4_N3 ,		// 9999000
+	PUMP_DISPLAY_5_N1 ,		// 999990
+	PUMP_DISPLAY_5_N2 ,		// 9999900
+	PUMP_DISPLAY_5_N3 ,		// 99999000
+	PUMP_DISPLAY_6_N1 ,		// 9999990
+	PUMP_DISPLAY_6_N2 ,		// 99999900
+	PUMP_DISPLAY_6_N3 		// 999999000
+} TDisplayFormat ;
+
+typedef enum TAuthMode
+{
+	INVALID_AUTH_MODE ,
+	NOT_AUTHABLE ,
+	COMP_AUTH ,
+	AUTO_AUTH ,
+	MONITOR_AUTH ,
+	ATTENDANT_AUTH ,
+	ATTENDANT_MONITOR_AUTH ,
+	CTF_AUTH ,
+	TAG_AUTH ,
+	OFFLINE_AUTH ,
+	ATTENDANT_TAG_AUTH ,
+	CLIENT_TAG_AUTH ,
+	ATTENDANT_AND_CLIENT_TAG_AUTH,
+	ATTENDANT_OR_CLIENT_TAG_AUTH,
+	LAST_AUTH_MODE
+} TAuthMode ;
+
+typedef enum TStackMode
+{
+	INVALID_STACK_MODE ,
+	STACK_DISABLED ,
+    STACK_MANUAL ,
+	STACK_AUTO
+} TStackMode ;
+
+typedef enum TDeliveryState
+{
+	UNKNOWN_DEL_STATE ,
+	CURRENT ,
+	STACKED ,
+	CLEARED
+} TDeliveryState ;
+
+typedef enum TDeliveryType
+{
+	UNKNOWN_DEL_TYPE ,
+	POSTPAY ,
+	PREPAY ,
+	PREPAY_REFUND ,
+	PREAUTH ,
+	MONITOR ,
+	TEST ,
+	DRIVEOFF ,
+	OFFLINE ,
+	CTF ,
+	CARD_CLIENT ,
+	INVALID_DEL_TYPE
+} TDeliveryType ;
+
+typedef enum TDeliveryLogState
+{
+	INVALID_LSTATE ,
+	NOT_LOGGED_LSTATE ,
+	LOGGED_LSTATE ,
+	CLEARED_LSTATE
+} TDeliveryLogState ;
+
+typedef enum TDeviceType
+{
+	SERVER_DEVICE = 1 ,
+	DISPENSER_DEVICE ,
+	DISPENSER_DRIVER_DEVICE ,
+	TANK_GAUGE_DEVICE ,
+	TANK_GAUGE_DRIVER_DEVICE ,
+	PRICE_SIGN_DEVICE ,
+	PRICE_SIGN_DRIVER_DEVICE
+} TDeviceType ;
+
+typedef enum TEventType
+{
+	INVALID_EVENT = 0 ,
+
+	SERVER_INFO_EVENT = 100 ,
+	SERVER_STARTED_EVENT  ,
+	SERVER_STOPPED_EVENT ,
+
+	DISPENSER_INFO_EVENT = 200 ,
+	DISPENSER_INSTALLED_EVENT ,
+	DISPENSER_STARTED_EVENT ,
+	DISPENSER_STOPPED_EVENT ,
+	DISPENSER_E_TOTALS_ERROR_EVENT ,
+	DISPENSER_OFFLINE_DELIVERIES_EVENT ,
+	DISPENSER_REMOTE_PRICE_CHANGE_EVENT ,
+	DISPENSER_LOST_DELIVERY_EVENT ,
+	DISPENSER_TAG_READ_EVENT ,
+	DISPENSER_ATTENDANT_TAG_READ_EVENT ,
+
+	DISPENSER_DRIVER_INFO_EVENT = 300 ,
+	DISPENSER_DRIVER_STARTED_EVENT ,
+	DISPENSER_DRIVER_STOPPED_EVENT ,
+
+	TANK_INFO_EVENT = 400 ,
+	TANK_SETUP_DATA_WARNING_EVENT ,
+	TANK_LEAK_ALARM_EVENT ,
+	TANK_HIGH_WATER_ALARM_EVENT ,
+	TANK_OVERFILL_ALARM_EVENT ,
+	TANK_LOW_PRODUCT_ALARM_EVENT ,
+	TANK_SUDDEN_LOSS_ALARM_EVENT ,
+	TANK_HIGH_PRODUCT_ALARM_EVENT ,
+	TANK_INVALID_FUEL_LEVEL_ALARM_EVENT ,
+	TANK_PROBE_OUT_ALARM_EVENT ,
+	TANK_HIGH_WATER_WARNING_EVENT ,
+	TANK_DELIVERY_NEEDED_WARNING_EVENT ,
+	TANK_MAXIMUM_PRODUCT_ALARM_EVENT ,
+	TANK_GROSS_LEAK_TEST_FAILED_ALARM_EVENT ,
+	TANK_PERIODIC_LEAK_TEST_FAILED_ALARM_EVENT ,
+	TANK_ANNUAL_LEAK_TEST_FAILED_ALARM_EVENT ,
+	TANK_PERIODIC_TEST_NEEDED_WARNING_EVENT ,
+	TANK_ANNUAL_TEST_NEEDED_WARNING_EVENT ,
+	TANK_PERIODIC_TEST_NEEDED_ALARM_EVENT ,
+	TANK_ANNUAL_TEST_NEEDED_ALARM_EVENT ,
+	TANK_LEAK_TEST_ACTIVE_INFO_EVENT ,
+	TANK_NO_CSLD_IDLE_TIME_WARNING_EVENT ,
+	TANK_SIPHON_BREAK_ACTIVE_WARNING_EVENT ,
+	TANK_CSLD_RATE_INCREASE_WARNING_EVENT ,
+	TANK_ACCUCHART_CALIBARTION_WARNING_EVENT ,
+	TANK_HRM_RECONCILATION_WARNING_EVENT ,
+	TANK_HRM_RECONCILATION_ALARM_EVENT ,
+	TANK_COLD_TEMPERATURE_WARNING_EVENT ,
+	TANK_MISSING_DELIVERY_TICKET_WARNING_EVENT ,
+	TANK_LINE_GROSS_LEAK_ALARM_EVENT ,
+
+	TANK_GAUGE_INFO_EVENT = 500 ,
+	TANK_GAUGE_INSTALLED_EVENT ,
+	TANK_GAUGE_STARTED_EVENT ,
+	TANK_GAUGE_STOPPED_EVENT ,
+
+	TANK_GAUGE_DRIVER_INFO_EVENT = 600 ,
+	TANK_GAUGE_DRIVER_STARTED_EVENT ,
+	TANK_GAUGE_DRIVER_STOPPED_EVENT ,
+
+	PRICE_SIGN_INFO_EVENT = 700 ,
+	PRICE_SIGN_INSTALLED_EVENT ,
+	PRICE_SIGN_STARTED_EVENT ,
+	PRICE_SIGN_STOPPED_EVENT ,
+
+	PRICE_SIGN_DRIVER_INFO_EVENT = 800 ,
+	PRICE_SIGN_DRIVER_STARTED_EVENT ,
+	PRICE_SIGN_DRIVER_STOPPED_EVENT ,
+} TEventType ;
+
+
+typedef enum TResult
+{
+	INVALID_HEADER_VERSION			= -1,
+	INVALID_INTERFACE_VERSION		= -2,
+	INVLAID_INTERFACE_ID			= -3,
+	INVALID_FUNCTION_ID				= -4,
+	INVALID_SOURCE_ID				= -5,
+	INVALID_DESTINATION_ID			= -6,
+	INVALID_OBJECT_ID				= -7,
+	INVALID_SEQUENCE_NO				= -8,
+	MSG_IN_BUFFER_OVERFLOW 			= -9,
+	MSG_OUT_BUFFER_OVERFLOW 		= -10,
+	PARAMETER_TYPE_MISMATCH 		= -11,
+	PARAMETER_COUNT_MISMATCH 		= -12,
+	SERVER_TIMEOUT 					= -13,
+	CONNECTION_BROKEN 				= -14,
+	SOCKET_READ_ERROR 				= -15,
+	NO_MSG_ERROR					= -16,
+	SOCKET_WRITE_ERROR 				= -17,
+	SERVER_NONASYNC_CALL			= -18,
+	SOCKET_NOT_CONNECTED			= -19,
+	CLIENT_NOT_CONNECTED			= -20,
+	OCX_NOT_CONNECTED				= -21,
+	INVALID_CLIENT_TYPE				= -22,
+	INTERNAL_SERVER_ERROR			= -23,
+	CALL_SOCKET_CLOSED_RESULT		= -24,
+	OK_RESULT						= 0,
+	OBJECT_EXISTS_RESULT,								// 01
+	OBJECT_DOES_NOT_EXIST_RESULT,						// 02
+	OBJECT_HAS_DEPENDANCIES_RESULT,						// 03
+	INVALID_INTERFACE_RESULT,							// 04
+	INVALID_EVENTS_SOCKET_RESULT,						// 05
+	INVALID_OBJECT_LINK_RESULT ,						// 06
+	INVALID_OBJECT_PARAMETER_RESULT ,					// 07	// new
+	NOT_LOGGED_ON_RESULT ,								// 08
+	ALREADY_LOGGED_ON_RESULT ,							// 09
+	INVALID_LOGON_RESULT ,								// 10
+	INVALID_CLIENT_TYPE_RESULT ,						// 11
+	PUMP_NOT_RESPONDING_RESULT,							// 12
+	PUMP_IN_USE_RESULT ,								// 13
+	PUMP_ALREADY_RESERVED_RESULT ,						// 14
+	PUMP_NOT_AVAILABLE_RESULT ,							// 15
+	PUMP_NOT_RESERVED_RESULT ,							// 16
+	PUMP_NOT_RESERVED_FOR_PREPAY_RESULT ,				// 17
+	PUMP_NOT_RESERVED_BY_YOU_RESULT ,					// 18
+	INVALID_PRESET_TYPE_RESULT ,						// 19
+	INVALID_HOSE_MASK_RESULT ,							// 20
+	PUMP_NOT_RESERVED_FOR_PREAUTH_RESULT ,				// 21
+	PREPAYS_NOT_PREMITTED_RESULT ,						// 22
+	PREAUTHS_NOT_PREMITTED_RESULT ,						// 23		// new
+	PUMP_CANNOT_BE_AUTHED_RESULT ,						// 24
+	PUMP_NOT_AUTHED_RESULT ,							// 25
+	NO_DELIVERY_AVAILABLE_RESULT ,						// 26
+	STACK_IS_DISABLED_RESULT ,							// 27
+	NO_CURRENT_DELIVERY_RESULT ,						// 28
+	STACK_FULL_RESULT ,									// 29
+	PUMP_NOT_STOPPED_RESULT ,							// 30
+	PUMP_NOT_DELIVERING_RESULT ,						// 31
+	INVALID_PRESET_AMOUNT_RESULT ,						// 32
+	PUMP_IS_STOPPED_RESULT ,							// 33
+	DELIVERY_ALREADY_LOCKED_RESULT ,					// 34
+	DELIVERY_IS_RESERVED_RESULT ,						// 35
+	DELIVERY_NOT_LOCKED_RESULT ,						// 36
+	DELIVERY_NOT_LOCKED_BY_YOU_RESULT ,					// 37
+	DELIVERY_TYPE_CANNOT_BE_STACKED_RESULT ,			// 38
+	DELIVERY_CANNOT_BE_CLEARED_AS_THIS_TYPE_RESULT ,	// 39
+	DELIVERY_NOT_CURRENT_RESULT ,						// 40
+	INVALID_CLIENT_ID_RESULT ,							// 41
+	DELIVERY_TERMINATED_RESULT ,						// 42
+	HAS_CURRENT_DELIVERY_RESULT ,						// 43
+	ATTENDANT_NOT_LOGGED_ON_RESULT ,				 	// 44
+	ATTENDANT_ALREADY_LOGGED_ON_RESULT ,				// 45
+	PUMP_IN_WRONG_AUTH_MODE_RESULT ,					// 46
+	PUMP_HAS_DELIVERIES_RESULT ,						// 47
+	SERVER_NOT_LICENSED_RESULT ,						// 48
+	NO_EZMOD_RESULT ,									// 49
+	LICENSE_EXPIRED_RESULT ,							// 50
+	CTF_NOT_PREMITTED_RESULT ,							// 51
+	PUMP_NOT_RESERVED_FOR_CTF_RESULT ,					// 52
+	ZIGBEE_MODULE_TYPE_ERROR_RESULT ,					// 53
+	LAST_RESULT											// 54		// must be last
+} TResult ;
+
+typedef enum TPresetType
+{
+	INVALID_PRESET_TYPE = 0 ,
+	NO_PRESET_TYPE ,
+	DOLLAR_PRESET_TYPE ,
+	VOLUME_PRESET_TYPE ,
+	DOLLAR_PREPAY_TYPE ,
+	VOLUME_PREPAY_TYPE ,
+	DOLLAR_PREAUTH_TYPE ,
+	VOLUME_PREAUTH_TYPE
+} TPresetType ;
+
+typedef enum TPumpState
+{										// EZForecourt - PAM100       - CBC
+	INVALID_PUMP_STATE = 0 ,			// 00          - 0 OFFLINE    - F falha
+	NOT_INSTALLED_PUMP_STATE ,			// 01          - 6 CLOSE      - F falha
+	NOT_RESPONDING_1_PUMP_STATE ,		// 02          - 0 OFFLINE    - F falha
+	IDLE_PUMP_STATE ,					// 03          - 1 IDLE       - L livre
+	PRICE_CHANGE_STATE ,				// 04          - 1 IDLE       - L livre
+	AUTHED_PUMP_STATE ,					// 05          - 9 AUTHORIZED - P Autorizada
+	CALLING_PUMP_STATE ,				// 06          - 5 CALL       - E aguardando liberacao
+	DELIVERY_STARTING_PUMP_STATE ,		// 07          - 2 BUSY       - A abastecendo
+	DELIVERING_PUMP_STATE ,				// 08          - 2 BUSY       - A abastecendo
+	TEMP_STOPPED_PUMP_STATE ,			// 09          - 8 STOP       - B bloqueada
+	DELIVERY_FINISHING_PUMP_STATE ,		// 10          - 2 BUSY       - A abastecendo
+	DELIVERY_FINISHED_PUMP_STATE ,		// 11          - 2 BUSY       - A abastecendo
+	DELIVERY_TIMEOUT_PUMP_STATE ,		// 12          - 1 IDLE       - L livre
+	HOSE_OUT_PUMP_STATE ,				// 13          - 5 CALL       - E aguardando liberacao
+	PREPAY_REFUND_TIMEOUT_STATE ,		// 14          - 1 IDLE       - L livre
+	DELIVERY_TERMINATED_STATE ,			// 15          - 3 EOT        - C concluido Abastecimento
+	ERROR_PUMP_STATE ,					// 16          - 0 OFFLINE    - F falha
+	NOT_RESPONDING_2_PUMP_STATE ,		// 17          - 0 OFFLINE    - F falha
+	LAST_PUMP_STATE ,					// 18          - 0 OFFLINE    - F falha
+} TPumpState ;
+
+typedef enum
+{
+	INVALID_PORT_STATUS = 0 ,
+	CLOSED_PORT_STATUS ,
+	OPEN_PORT_STATUS
+} TPortStatus ;
+
+typedef enum
+{
+	INVALID_TAG_TYPE ,
+	ATTENDANT_TAG_TYPE ,
+	BLOCKED_ATTENDANT_TAG_TYPE ,
+	WRONG_SHIFT_ATTENDANT_TAG_TYPE ,
+	CLIENT_TAG_TYPE ,
+	BLOCKED_CLIENT_TAG_TYPE ,
+	UNKNOWN_TAG_TYPE
+} TTagType ;
+
+//#if !defined(_LINUX_)
+#if defined(_WIN32)
+
+typedef long (__cdecl *TDriverEntry) (void* );
+
+typedef struct TDriverArgs
+{
+	unsigned short _size ;
+	unsigned short _version ;
+	short _driverID ;
+	short _driverNo ;
+	wchar_t _protocolINIKey[ 21 ] ;
+	long _protocolID ;
+	long _deviceType ;
+	bool _standalone ;
+	wchar_t _serialNo[ 11 ];
+	wchar_t _portName[ 21 ];
+	long _runningTotalRate ;
+	TDriverEntry _driverEntry ;
+} TDriverArgs ;
+
+#endif
+
+typedef enum THose
+{
+	NO_HOSES	= 0x00 ,
+	HOSE_1		= 0x01 ,
+	HOSE_2		= 0x02 ,
+	HOSE_3		= 0x04 ,
+	HOSE_4		= 0x08 ,
+	HOSE_5		= 0x10 ,
+	HOSE_6		= 0x20 ,
+	HOSE_7		= 0x40 ,
+	HOSE_8		= 0x80 ,
+	ALL_HOSES	= 0xFF
+} THose ;
+
+typedef enum TAllocLimitType
+{
+	INVALID_LIMIT_TYPE = 0 ,
+	NO_LIMIT_TYPE ,
+	DOLLAR_LIMIT_TYPE ,
+	VOLUME_LIMIT_TYPE
+} TAllocLimitType  ;
+
+typedef enum TClientEvent
+{
+	NO_CLIENT_EVENT ,
+	PUMP_EVENT ,
+	DELIVERY_EVENT ,
+	SERVER_EVENT ,
+	CLIENT_EVENT ,
+	DB_LOG_EVENT ,
+	DB_LOG_DELIVERY ,
+	DB_CLEAR_DELIVERY ,
+	DB_STACK_DELIVERY ,
+	DB_LOG_ETOTALS ,
+	DB_TRIGGER ,
+	DB_ATTENDANT_LOGON_EVENT ,
+	DB_ATTENDANT_LOGOFF_EVENT ,
+	DB_TANK_STATUS ,
+	SERIAL_PORT_EVENT ,
+	ZIGBEE_EVENT ,
+	UVE_EVENT ,
+    ZERO_DELIVERY_EVENT ,
+	ZB_STATUS_EVENT ,
+	ZB_PAN_EVENT ,
+	ZIGBEE_CMD_EVENT ,
+	ZIGBEE_RAW_EVENT ,
+	CARD_READ_EVENT ,
+	ZB2G_STATUS_EVENT ,
+    LOG_EVENT_EVENT
+} TClientEvent  ;
+
+typedef enum TTankType
+{
+	INVALID_TANK_TYPE = 0 ,
+	MANUAL_DIP_TANK_TYPE ,
+	GAUGED_TANK_TYPE
+} TTankType ;
+
+
+//#ifdef _LINUX_
+#if defined(__linux__)
+#define NO_ZB_ADDRESS 0xFFFFFFFFFFFFFFFFLLU
+#else
+#define NO_ZB_ADDRESS 0xFFFFFFFFFFFFFFFF
+#endif
+
+
+#ifdef _WINCE_
+
+#ifdef EZ_DEBUG
+
+#define LOGDIR				"\\"
+#define INIDIR				"\\NDFlash\\EZDebug\\"
+#define APPDIR				"\\"
+#define NVDIR               "\\NDFlash\\EZForecourt\\"
+
+#else
+
+#define LOGDIR				"\\"
+#define INIDIR				"\\NDFlash\\EZForecourt\\"
+#define APPDIR				"\\NDFlash\\EZForecourt\\"
+#define NVDIR				"\\NDFlash\\EZForecourt\\"
+
+#endif
+
+//#elif defined( _LINUX_ )
+#elif defined(__linux__)
+
+#ifdef EZ_DEBUG
+
+#define LOGDIR				"Log/"
+#define INIDIR				""
+#define APPDIR				""
+#define NVDIR               ""
+
+#else
+
+#define LOGDIR				"Log/"
+#define INIDIR				""
+#define APPDIR				""
+#define NVDIR               ""
+
+#endif
+#else
+
+#ifdef EZ_DEBUG
+
+#define LOGDIR				"\\EZForecourt\\log\\"
+#define INIDIR				"\\EZForecourt\\DebugINI\\"
+#define APPDIR				"\\work\\EZServer\\Debug\\"
+#define NVDIR               "\\EZForecourt\\"
+
+#else
+
+#define LOGDIR				"\\EZForecourt\\log\\"
+#define INIDIR				"\\EZForecourt\\"
+#define APPDIR				"\\EZForecourt\\"
+#define NVDIR               "\\EZForecourt\\"
+
+#endif
+
+#endif
+
+#ifdef _WINCE_
+
+extern HINSTANCE g_hModule ;
+
+#endif
