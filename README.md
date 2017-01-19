@@ -1,6 +1,6 @@
 # EZServer
 ========
-<a href="http://www.gta.ufrj.br"> <img src="http://www.gta.ufrj.br/ensino/eel879/trabalhos_vf_2010_2/andre/images/Server-based-network.png" align="left" hspace="10" vspace="0"></a>
+<a href="http://www.gta.ufrj.br"> <img src="http://www.gta.ufrj.br/ensino/eel879/trabalhos_vf_2010_2/andre/images/Server-based-network.png" align="center" hspace="10" vspace="0"></a>
 
 Seguindo o conceito de Cliente - Servidor, o EZServer disponibiliza suas API's para acesso via biblioteca EZClient.dll onde vários clientes simultaneamente podem manipular dados contidos dentro do EZServer. Toda essa manipulação de dados é monitorada e registrada no BD do EZServer.
 
@@ -18,3 +18,8 @@ Possui exemplos de:
 * Leitura de Cartões ;
 * Leitura de Tanques ;
 * Setando valor fixo de Abastecimento ;
+
+Requirements
+------------
+* EZClient.dll compatível com a versão do programa de exemplo. Atualmente 2.3.0.1 ou maior ;
+* 
