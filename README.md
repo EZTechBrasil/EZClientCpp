@@ -1,8 +1,14 @@
+# EZForecourt
+========
+<a href="http://eztech.ind.br"> <img src="http://eztech.ind.br/img/produtos/3a10fda23695a1c68906f3a592e55faf1c20e529.png" align="center" hspace="10" vspace="0"></a>
+
+XXX
+
 # EZServer
 ========
-<a href="http://www.gta.ufrj.br"> <img src="http://www.gta.ufrj.br/ensino/eel879/trabalhos_vf_2010_2/andre/images/Server-based-network.png" align="center" hspace="10" vspace="0"></a>
+<a href="http://www.gta.ufrj.br"> <img src="http://www.gta.ufrj.br/ensino/eel879/trabalhos_vf_2010_2/andre/images/Server-based-network.png" align="left" hspace="10" vspace="0"></a>
 
-Seguindo o conceito de Cliente - Servidor, o EZServer disponibiliza suas API's para acesso via biblioteca EZClient.dll onde vários clientes simultaneamente podem manipular dados contidos dentro do EZServer. Toda essa manipulação de dados é monitorada e registrada no BD do EZServer.
+Seguindo o conceito de Cliente - Servidor, o EZServer disponibiliza suas API's para acesso via biblioteca EZClient.dll onde vários clientes simultaneamente podem manipular dados contidos dentro do EZServer. Toda essa manipulação de dados é monitorada e registrada no BD do EZServer, esteja ele dentro de um EZForecourt ou em um microcomputador.
 
 # EZClientCpp
 ========
