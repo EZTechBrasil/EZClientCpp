@@ -21,7 +21,9 @@ Algumas características básica do EZServer são:
       
 <a href="http://icons.iconarchive.com"> <img src="http://icons.iconarchive.com/icons/arrioch/senary/256/Misc-file-dll-icon.png" align="right" hspace="10" vspace="0"></a>
 
-Dynamic-link library (biblioteca de vínculo dinâmico) ou DLL, é a implementação feita pela Microsoft para o conceito de bibliotecas compartilhadas nos sistemas operacionais Microsoft Windows e OS/2. Essas bibliotecas geralmente tem as extensões DLL, OCX (para bibliotecas que contêm controles ActiveX), ou DRV (para drivers de sistema legados).
+Dynamic-link library (biblioteca de vínculo dinâmico) ou DLL, é a implementação feita pela Microsoft para o conceito de bibliotecas compartilhadas nos sistemas operacionais Microsoft Windows e OS/2. Essas bibliotecas geralmente tem as extensões DLL ou OCX (para bibliotecas que contêm controles ActiveX).
+
+A EZClient.dll fornecerá as funções reconhecidas pelo EZServer e fará a ligação entre o servidor e o cliente, garantindo a requisição dos dados da forma correta e a segurança do serviço.
 
 
 # EZClientCpp
