@@ -16,7 +16,7 @@ Algumas características básica do **EZServer** são:
 * Atende os pedidos e, em seguida, responde aos clientes com os dados solicitados;
 * Pode se comunicar com outros servidores para atender uma solicitação específica do cliente;
       
-<a href="http://icons.iconarchive.com"> <img src="http://icons.iconarchive.com/icons/arrioch/senary/256/Misc-file-dll-icon.png" align="right" hspace="10" vspace="0"></a>
+<a href="http://14.161.9.214/Tools/tinyfilemanager.net"> <img src="http://14.161.9.214/Tools/tinyfilemanager.net/img/ico/DLL.png" align="right" hspace="10" vspace="0"></a>
 
 **Dynamic-link library (biblioteca de vínculo dinâmico)** ou **DLL**, é a implementação feita pela **Microsoft** para o conceito de bibliotecas compartilhadas nos sistemas operacionais **Microsoft Windows e OS/2**. Essas bibliotecas geralmente tem as extensões **DLL** ou **OCX** (para bibliotecas que contêm controles ActiveX).
 
