@@ -10,6 +10,11 @@ XXX
 
 Seguindo o conceito de Cliente - Servidor, o EZServer disponibiliza suas API's para acesso via biblioteca EZClient.dll onde vários clientes simultaneamente podem manipular dados contidos dentro do EZServer. Toda essa manipulação de dados é monitorada e registrada no BD do EZServer, esteja ele dentro de um EZForecourt ou dentro de um microcomputador.
 
+<a href="http://icons.iconarchive.com"> <img src="http://icons.iconarchive.com/icons/arrioch/senary/256/Misc-file-dll-icon.png" align="right" hspace="10" vspace="0"></a>
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+
 # EZClientCpp
 ========
 Programa de exemplo cliente que se conecta ao EZServer, usado como referência para novas integrações. 
