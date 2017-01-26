@@ -6,9 +6,9 @@ XXX
 
 # EZServer
 ========
-<a href="http://www.gta.ufrj.br"> <img src="http://www.gta.ufrj.br/ensino/eel879/trabalhos_vf_2010_2/andre/images/Server-based-network.png" align="left" hspace="10" vspace="0"></a>
+<a href="https://www.tutorialspoint.com"> <img src="https://www.tutorialspoint.com/data_communication_computer_network/images/client_server.jpg" align="left" hspace="10" vspace="0"></a>
 
-Seguindo o conceito de Cliente - Servidor, o EZServer disponibiliza suas API's para acesso via biblioteca EZClient.dll onde vários clientes simultaneamente podem manipular dados contidos dentro do EZServer. Toda essa manipulação de dados é monitorada e registrada no BD do EZServer, esteja ele dentro de um EZForecourt ou em um microcomputador.
+Seguindo o conceito de Cliente - Servidor, o EZServer disponibiliza suas API's para acesso via biblioteca EZClient.dll onde vários clientes simultaneamente podem manipular dados contidos dentro do EZServer. Toda essa manipulação de dados é monitorada e registrada no BD do EZServer, esteja ele dentro de um EZForecourt ou dentro de um microcomputador.
 
 # EZClientCpp
 ========
