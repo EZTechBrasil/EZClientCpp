@@ -40,7 +40,7 @@ Com essa camada podemos garantir o acesso do cliente ao **EZServer** de forma se
 
 # EZClientCpp
 ========
-<a href="https://uploaddeimagens.com.br"> <img src="https://uploaddeimagens.com.br/imagens/ezclientcpp-png" align="center" hspace="10" vspace="0"></a>
+<a href="http://ap.imagensbrasil.org"> <img src="http://ap.imagensbrasil.org/images/2017/01/26/EZClientCpp.md.png" align="center" hspace="10" vspace="0"></a>
 Programa de exemplo cliente que se conecta ao **EZServer**, usado como referência para novas integrações. É um tipo de cliente Bronze e possui exemplos de:
 
 * Tipo de Cliente Ativo ( Comum ) ou Passivo ( Por Evento ) ;
