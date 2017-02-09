@@ -23,13 +23,12 @@ Seja bem vindo a família EZTech, sua presença é muito importante para nós e 
 
 Buscaremos oferecer o que há de melhor em nossos conteúdos, estamos certos que todos os nossos objetivos serão alcançados, muitas novidades estaram sendo oferecidas. Não deixe de explorar e conhecer a fundo nossos produtos, contamos com a sua parceria.
 
-# EZForecourt
+# Arquitetura dos Sistemas de Hardware
 ========
-<a href="http://blog.pmweb.com.br"> <img src="http://blog.pmweb.com.br/wp-content/uploads/boas-vindas-email.jpg" align="center" hspace="10" vspace="0"></a>
 
-O **EZForecourt** em sua versão **USB** depende de um microcomputador por não ter um sistema operacional, neste caso o serviço estará em execução no microcomputador na qual esteja ligado e o acesso ao **EZServer** terá que indicar o IP do microcomputador no qual o serviço está em execução. Nas demais versões o **EZForecourt ( Plus, 2GS, Vision )** tem o seu próprio sistema operacional e capacidade de manter um serviço embarcado funcionando perfeitamente, para este caso o acesso **TCP/IP** teremos que apontar para o IP do concentrador.
+[ FLUXOGRAMA ]
 
-# EZServer
+## Kit de Integração
 ========
 <a href="https://www.tutorialspoint.com"> <img src="https://www.tutorialspoint.com/data_communication_computer_network/images/client_server.jpg" align="left" hspace="10" vspace="0"></a>
 
