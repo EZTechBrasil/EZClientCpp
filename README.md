@@ -1,11 +1,31 @@
+- Introdução ( Msg de boas vindas )
+- Arquitetura dos Sistemas de Hardware ( Fazer Diagramas )
+	- Kit de Integração
+	- EZForecourt USB **
+	- EZForecourt Plus **
+	- EZForecourt Plus 2GS *
+	- Vision *
+	- EZRemote
+	- EZRemote 2G
+- QuickStart
+	- Pacote de Instalação ( Passo a Passo ) **
+	- EZMonitor *
+	- EZSim *
+- www.integracao.com
+
+
+
 # Introdução
 ========
+<a href="http://www.freeimages.com"> <img src="http://www.freeimages.com/assets/183410/1834094233/business-graphics-1428645-m.jpg" align="left" hspace="10" vspace="0"></a>
 
-Primeiramente vamos entender conceitos básicos de **EZForecourt(ou Concentradores)** e **EZServer**, como funciona o processo de requisição e entrega na camada superior(**EZServer <-> EZClient**).
+Seja bem vindo a família EZTech, sua presença é muito importante para nós e estamos felizes por ter vocês conosco, juntos estaremos construindo um novo futuro, agradecemos pela confiança em nós depositada. Muito obrigado, estamos a sua disposição para ajudá-lo em suas necessidades, e temos certeza de que corresponderemos a parceria e desenvolveremos um ótimo trabalho conjunto. O objetivo é organizar e acelerar este processo de integração e envolver o seu desenvolvimento em conjunto.
+
+Buscaremos oferecer o que há de melhor em nossos conteúdos, estamos certos que todos os nossos objetivos serão alcançados, muitas novidades estaram sendo oferecidas. Não deixe de explorar e conhecer a fundo nossos produtos, contamos com a sua parceria.
 
 # EZForecourt
 ========
-<a href="http://eztech.ind.br"> <img src="http://eztech.ind.br/img/produtos/3a10fda23695a1c68906f3a592e55faf1c20e529.png" align="center" hspace="10" vspace="0"></a>
+<a href="http://blog.pmweb.com.br"> <img src="http://blog.pmweb.com.br/wp-content/uploads/boas-vindas-email.jpg" align="center" hspace="10" vspace="0"></a>
 
 O **EZForecourt** em sua versão **USB** depende de um microcomputador por não ter um sistema operacional, neste caso o serviço estará em execução no microcomputador na qual esteja ligado e o acesso ao **EZServer** terá que indicar o IP do microcomputador no qual o serviço está em execução. Nas demais versões o **EZForecourt ( Plus, 2GS, Vision )** tem o seu próprio sistema operacional e capacidade de manter um serviço embarcado funcionando perfeitamente, para este caso o acesso **TCP/IP** teremos que apontar para o IP do concentrador.
 
