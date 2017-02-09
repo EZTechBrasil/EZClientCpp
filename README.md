@@ -19,7 +19,7 @@
 ========
 <a href="http://www.freeimages.com"> <img src="http://www.freeimages.com/assets/183410/1834094233/business-graphics-1428645-m.jpg" align="left" hspace="10" vspace="0"></a>
 
-Seja bem vindo a família EZTech, sua presença é muito importante para nós e estamos felizes por ter vocês conosco, juntos estaremos construindo um novo futuro, agradecemos pela confiança em nós depositada. Muito obrigado, estamos a sua disposição para ajudá-lo em suas necessidades, e temos certeza de que corresponderemos a parceria e desenvolveremos um ótimo trabalho conjunto. O objetivo é organizar e acelerar este processo de integração e envolver o seu desenvolvimento em conjunto.
+Seja bem vindo a família **EZTech**, sua presença é muito importante para nós e estamos felizes por ter vocês conosco, juntos estaremos construindo um novo futuro, agradecemos pela confiança em nós depositada. Muito obrigado, estamos a sua disposição para ajudá-lo em suas necessidades, e temos certeza de que corresponderemos a parceria e desenvolveremos um ótimo trabalho conjunto. O objetivo é organizar e acelerar este processo de integração e envolver o seu desenvolvimento em conjunto.
 
 Buscaremos oferecer o que há de melhor em nossos conteúdos, estamos certos que todos os nossos objetivos serão alcançados, muitas novidades estaram sendo oferecidas. Não deixe de explorar e conhecer a fundo nossos produtos, contamos com a sua parceria.
 
