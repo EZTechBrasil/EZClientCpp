@@ -80,19 +80,19 @@ Requirements
 ------------ Máscara ------------
 ## Synopsis
 
-At the top of the file there should be a short introduction and/ or overview that explains **what** the project is. This description should match descriptions added for package managers (Gemspec, package.json, etc.)
+This project aims to assist partners in integrating with the EZTech service, using the APIs in a simple and practical way to serve as an example for a new integration.
 
 ## Code Example
 
-Show what the library does as concisely as possible, developers should be able to figure out **how** your project solves their problem by looking at the code example. Make sure the API you are showing off is obvious, and that your code is short and concise.
+This project will consume a library called EZClient and will use its APIs to connect and consume EZTech information, such as: Deliveries, Tank Reading, Pump States...
 
 ## Motivation
 
-A short description of the motivation behind the creation and maintenance of the project. This should explain **why** the project exists.
+EZTech's priority is to make it easier for you to understand the consumables APIs of our service, in order to ensure that you partner, feel secure when integrating with our equipment. Uncomplication is our goal.
 
 ## Installation
 
-Provide code examples and explanations of how to get the project.
+[ Em construção ]
 
 ## API Reference
 
