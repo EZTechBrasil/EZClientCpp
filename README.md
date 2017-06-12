@@ -4,7 +4,22 @@
 
 This project aims to assist partners in integrating with the EZTech service, using the APIs in a simple and practical way to serve as an example for a new integration.
 
-# Requirements
+# Code Example #
+
+This project will consume a library called EZClient and will use its APIs to connect and consume EZTech information, such as: Deliveries, Tank Reading, Pump States...
+
+# Motivation #
+
+EZTech's priority is to make it easier for you to understand the consumables APIs of our service, in order to ensure that you partner, feel secure when integrating with our equipment. Uncomplication is our goal.
+
+# Installation #
+
+To install the EZClient.cpp project follow these steps:
+
+## Passo 1 - Clone or Download Project:
+[![CloneProject](https://github.com/EZTechBrasil/EZClientCpp/blob/Eric/Pictures/clone-repo-clone-url-button.png)](https://help.github.com/articles/cloning-a-repository/)
+
+## Passo 2 - Requirements for execution:
 [![Stdio.h](https://img.shields.io/badge/stdio-release-green.svg)](https://sourceforge.net/p/mingw/mingw-org-wsl/ci/21762bb4a1bd0c88c38eead03f59e8d994349e83/tree/include/stdio.h)
 [![Stdlib.h](https://img.shields.io/badge/stdlib-release-green.svg)](https://www.tutorialspoint.com/c_standard_library/stdlib_h.htm)
 [![Signal.h](https://img.shields.io/badge/signal-release-green.svg)](http://www.uniriotec.br/~morganna/guia/libc/cs_signal.html)
@@ -24,26 +39,7 @@ This project aims to assist partners in integrating with the EZTech service, usi
 [![Sys/prctl.h](https://img.shields.io/badge/prctl-release-green.svg)](http://man7.org/linux/man-pages/man2/prctl.2.html)
 [![Sys/signal.h](https://img.shields.io/badge/signal-release-green.svg)](http://unix.superglobalmegacorp.com/Net2/newsrc/sys/signal.h.html)
 
-# Code Example #
-
-This project will consume a library called EZClient and will use its APIs to connect and consume EZTech information, such as: Deliveries, Tank Reading, Pump States...
-
-# Motivation #
-
-EZTech's priority is to make it easier for you to understand the consumables APIs of our service, in order to ensure that you partner, feel secure when integrating with our equipment. Uncomplication is our goal.
-
-# Installation #
-
-To install the EZClient.cpp project follow these steps:
-
-## Passo 1:
-[![CloneProject](https://github.com/EZTechBrasil/EZClientCpp/blob/Eric/Pictures/clone-repo-clone-url-button.png)](https://help.github.com/articles/cloning-a-repository/)
-
-
-
 ## API Reference
-
-
 
 [ Wikipedia ]
 
