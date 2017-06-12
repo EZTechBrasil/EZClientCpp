@@ -6,10 +6,10 @@ This project aims to assist partners in integrating with the EZTech service, usi
 
 To install the EZClient.cpp project follow these steps:
 
-## Passo 1 - Clone or Download Project:
+## Step 1 - Clone or Download Project:
 [![CloneProject](https://github.com/EZTechBrasil/EZClientCpp/blob/Eric/Pictures/clone-repo-clone-url-button.png)](https://help.github.com/articles/cloning-a-repository/)
 
-## Passo 2 - Requirements for execution:
+## Step 2 - Requirements for execution:
 [![Stdio.h](https://img.shields.io/badge/stdio-release-green.svg)](https://sourceforge.net/p/mingw/mingw-org-wsl/ci/21762bb4a1bd0c88c38eead03f59e8d994349e83/tree/include/stdio.h)
 [![Stdlib.h](https://img.shields.io/badge/stdlib-release-green.svg)](https://www.tutorialspoint.com/c_standard_library/stdlib_h.htm)
 [![Signal.h](https://img.shields.io/badge/signal-release-green.svg)](http://www.uniriotec.br/~morganna/guia/libc/cs_signal.html)
@@ -28,6 +28,12 @@ To install the EZClient.cpp project follow these steps:
 [![Sys/types.h](https://img.shields.io/badge/types-release-green.svg)](http://pubs.opengroup.org/onlinepubs/009696699/basedefs/sys/types.h.html)
 [![Sys/prctl.h](https://img.shields.io/badge/prctl-release-green.svg)](http://man7.org/linux/man-pages/man2/prctl.2.html)
 [![Sys/signal.h](https://img.shields.io/badge/signal-release-green.svg)](http://unix.superglobalmegacorp.com/Net2/newsrc/sys/signal.h.html)
+
+## Step 3 - Installing a virtual simulator with manual or automatic deliveries:
+
+[![Quickstart Manual](https://github.com/EZTechBrasil/EZClientCpp/blob/Eric/Pictures/QUICKSTART%20MANUAL%20INTEGRATION%20KIT.png)](https://github.com/EZTechBrasil/Integracao/raw/master/downloads/INTEGRATION_KIT_QUICKSTART_MANUAL.pdf)
+
+[ Wikipedia ]
 
 ## API Reference
 
