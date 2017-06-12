@@ -1,0 +1,2 @@
+#define VERSION		"2,0,0,0"
+#define EZSERVER_VERSION_COMPATIBILITY		"2,3,0,1"
