@@ -35,9 +35,13 @@ To install the EZClient.cpp project follow these steps:
 
 [![Automatic Simulator](https://github.com/EZTechBrasil/EZClientCpp/blob/Eric/Pictures/AUTOMATIC%20SIMULATOR.png)](EMCONSTRUCAO)
 
+## Step 4 - Configuring and Running
+
+[ Em construção ]
+
 ## API Reference
 
-[ Wikipedia ]
+[![Quickstart Manual](https://github.com/EZTechBrasil/EZClientCpp/blob/Eric/Pictures/Developer.png)](http://www.execweb.com.br/eztech/EZAdmin/downloads/ManualDesenvolvimento.pdf)
 
 ## Tests
 
