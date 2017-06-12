@@ -1,6 +1,7 @@
+<img src="https://github.com/EZTechBrasil/EZClientCpp/blob/Eric/Pictures/logo-eztech.png?raw=true" width="300" height="auto">
+
 # EZClient.cpp #
 
-<img src="https://github.com/EZTechBrasil/EZClientCpp/blob/Eric/Pictures/logo-eztech.png?raw=true" width="300" height="auto">
 This project aims to assist partners in integrating with the EZTech service, using the APIs in a simple and practical way to serve as an example for a new integration.
 
 # Installation #
