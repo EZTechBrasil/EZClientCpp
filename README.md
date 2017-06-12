@@ -1,6 +1,6 @@
 ## Synopsis
 
-![EZTech](https://github.com/EZTechBrasil/EZClientCpp/blob/Eric/Pictures/logo-eztech.png?raw=true)
+<img src="(https://github.com/EZTechBrasil/EZClientCpp/blob/Eric/Pictures/logo-eztech.png?raw=true" alt="" height="30px">
 This project aims to assist partners in integrating with the EZTech service, using the APIs in a simple and practical way to serve as an example for a new integration.
 
 ## Code Example
