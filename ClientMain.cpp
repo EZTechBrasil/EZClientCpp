@@ -57,9 +57,9 @@
 #include "ClientMain.h"
 
 //-----------------------------------------------------------------------------
-bool runEvents   = true;					// Processando por Pooling
+bool runEvents   = false;					// Processando por Pooling
 bool isConnected = false;					// Não conectado ao Servidor
-char EZServerAddr[MAX_PATH] = "192.168.1.111";	// Endereco padrao do servidor
+char EZServerAddr[MAX_PATH] = "127.0.0.1";	// Endereco padrao do servidor
 //char EZServerAddr[MAX_PATH] = "EZServerCE";	// Endereco padrao do servidor
 
 int  appPump = 1;							// Bomba em uso
