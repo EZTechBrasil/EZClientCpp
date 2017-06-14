@@ -37,20 +37,12 @@ To install the EZClient.cpp project follow these steps:
 
 ## Step 4 - Configuring and Running
 
-[ Em construção ]
+Open the source code of the project and change the IP address to access the EZServer according to your needs.
+[![EZClientCppConfigAdress](https://github.com/EZTechBrasil/EZClientCpp/blob/Eric/Pictures/EZClientCppConfigAdress.png)](https://github.com/EZTechBrasil/EZClientCpp/blob/Eric/Pictures/EZClientCppConfigAdress.png)
+
+Run the application and see it consuming the EZServer information.
+[![EZClientCpp](https://github.com/EZTechBrasil/EZClientCpp/blob/Eric/Pictures/EZClientCpp.png)](https://github.com/EZTechBrasil/EZClientCpp/blob/Eric/Pictures/EZClientCpp.png)
 
 ## API Reference
 
 [![Quickstart Manual](https://github.com/EZTechBrasil/EZClientCpp/blob/Eric/Pictures/Developer.png)](http://www.execweb.com.br/eztech/EZAdmin/downloads/ManualDesenvolvimento.pdf)
-
-## Tests
-
-[ Step-by-step project execution - Wikipedia ]
-
-## Contributors
-
-[ 
-
-## License
-
-A short snippet describing the license (MIT, Apache, etc.)
