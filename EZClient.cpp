@@ -1,14 +1,14 @@
 //-----------------------------------------------------------------------------
 //
-//  Empresa     :  EzTech Tecnologia e Automação Ltda
+//  Company     : EZTech Technology and Automation Ltda
 //        				 http://www.eztech.ind.br/
 //
 //
-//	Created     : 24/08/2012
+//	Created     : 08/2012
+//  Updated		: 07/2017
 //
-//  Descricao   : Classe para carga e acesso da biblioteca EZClient.dll
 //
-//  Observacoes :
+//  Description   : Class for library loading and access EZClient.dll
 //
 //-----------------------------------------------------------------------------
 #include <stdio.h>
@@ -40,7 +40,7 @@
 #include "EZClient.h"
 
 //-----------------------------------------------------------------------------
-// Construtor padrao
+// Builder Default
 CEZClient::CEZClient()
 {
 	int  ret;
@@ -54,13 +54,12 @@ CEZClient::CEZClient()
 	strcpy(ezpath, "/usr/lib");
 #endif
 
-	if( (ret=LoadAPIs(ezpath))!=0 )
-		printf("\n*** Erro %d carregando %s", ret, EZ_LIB_NAME);  // __FUNCTION__ nao existe no VC6
-		//printf("\n*** %s - Erro %d carregando %s", __FUNCTION__, ret, EZ_LIB_NAME);
+	if( ( ret = LoadAPIs( ezpath ) )!= 0 )
+		printf( "\n*** Error %d loading %s", ret, EZ_LIB_NAME) ;
 }
 
 //-----------------------------------------------------------------------------
-// Construtor de refencia
+// Reference Constructor
 CEZClient::CEZClient(char* dllpath)
 {
 	int ret;
@@ -68,12 +67,11 @@ CEZClient::CEZClient(char* dllpath)
 	Initializer();
 
 	if( (ret=LoadAPIs(dllpath))!=0 )
-		printf("\n*** Erro %d carregando %s", ret, EZ_LIB_NAME);  // __FUNCTION__ nao existe no VC6
-		//printf("\n*** %s - Erro %d carregando %s", __FUNCTION__, ret, EZ_LIB_NAME);
+		printf("\n*** Error %d loading %s", ret, EZ_LIB_NAME);
 }
 
 //-----------------------------------------------------------------------------
-// Destrutor
+// Destructor
 CEZClient::~CEZClient()
 {
 	if( dllHandle!=NULL )
@@ -84,8 +82,8 @@ CEZClient::~CEZClient()
 
 #if defined(__linux__)
 
-	if( oldTerm.c_lflag!=0 )
-		tcsetattr(STDIN_FILENO, TCSANOW, &oldTerm);
+	if( oldTerm.c_lflag != 0 )
+		tcsetattr( STDIN_FILENO, TCSANOW, &oldTerm ) ;
 
 #endif
 
@@ -94,21 +92,21 @@ CEZClient::~CEZClient()
 //-----------------------------------------------------------------------------
 bool CEZClient::isLoaded()
 {
-	return dllLoaded;
+	return dllLoaded ;
 }
 
 //-----------------------------------------------------------------------------
-int CEZClient::LoadAPIs(char* dllpath)
+int CEZClient::LoadAPIs( char* dllpath )
 {
-	char buffer[MAX_PATH];
+	char buffer[MAX_PATH] ;
 
-#if defined(_WIN32)
+#if defined( _WIN32 )
 
-	char serror[MAX_PATH];
+	char serror[MAX_PATH] ;
 
-	sprintf(buffer, "%s\\%s", dllpath, EZ_LIB_NAME);
+	sprintf( buffer, "%s\\%s", dllpath, EZ_LIB_NAME ) ;
 
-#elif defined(__linux__)
+#elif defined( __linux__ )
 
 	char *serror;
 
@@ -116,18 +114,19 @@ int CEZClient::LoadAPIs(char* dllpath)
 
 #endif
 
-	dllHandle=LoadLibrary(buffer);
-	if( dllHandle==NULL)
+	dllHandle = LoadLibrary( buffer ) ;
+	if( dllHandle == NULL )
 	{
 
-#if defined(_WIN32)
-		GetLastErrorText(GetLastError(), serror, sizeof(serror)-1);
-#elif defined(__linux__)
-		serror=dlerror();
+#if defined( _WIN32 )
+		GetLastErrorText( GetLastError(), serror, sizeof( serror ) -1 ) ;
+
+#elif defined( __linux__ )
+		serror = dlerror() ;
+
 #endif
-		printf("\n*** Erro carregando libEZClient: %s", serror);  // __FUNCTION__ nao existe no VC6
-		//printf("\n*** %s - Erro carregando libEZClient: %s", __FUNCTION__, serror);
-		return -1001;
+		printf("\n*** Error loading libEZClient: %s", serror); 
+		return -1001 ;
 	}
 
 	DllVersion=(typeDllVersion) GetProcAddress(dllHandle,"DllVersion");
@@ -712,21 +711,45 @@ int CEZClient::LoadAPIs(char* dllpath)
 	if(GetGradePropertiesEx==NULL) return -1215;
 
 	GetTankPropertiesEx=(typeGetTankPropertiesEx) GetProcAddress(dllHandle,"GetTankPropertiesEx");
-	if(GetTankPropertiesEx==NULL) return -1216;
+	if(GetTankPropertiesEx==NULL) return -1216 ;
 
 	GetNextZB2GStatusEvent=(typeGetNextZB2GStatusEvent) GetProcAddress(dllHandle,"GetNextZB2GStatusEvent");
-	if(GetNextZB2GStatusEvent==NULL) return -1217;
+	if(GetNextZB2GStatusEvent==NULL) return -1217 ;
 
 	GetNextLogEventEvent=(typeGetNextLogEventEvent) GetProcAddress(dllHandle,"GetNextLogEventEvent");
-	if(GetNextLogEventEvent==NULL) return -1218;
+	if(GetNextLogEventEvent==NULL) return -1218 ;
 
 	GetNextDBTankStatusEventEx2=(typeGetNextDBTankStatusEventEx2) GetProcAddress(dllHandle,"GetNextDBTankStatusEventEx2");
-	if(GetNextDBTankStatusEventEx2==NULL) return -1219;
+	if(GetNextDBTankStatusEventEx2==NULL) return -1219 ;
 
-	//IsValidMACLicense=(typeIsValidMACLicense) GetProcAddress(dllHandle,"IsValidMACLicense");
-	//if(IsValidMACLicense==NULL) return -1220;
+	GetDeliveryPropertiesEx4=(typeGetDeliveryPropertiesEx4) GetProcAddress(dllHandle,"GetDeliveryPropertiesEx4");
+	if(GetDeliveryPropertiesEx4==NULL) return -1220 ;
 
-	dllLoaded =	true;
+	PaymentAuthorise=(typePaymentAuthorise) GetProcAddress(dllHandle,"PaymentAuthorise");
+	if(PaymentAuthorise==NULL) return -1221 ;
+
+	PaymentReserve=(typePaymentReserve) GetProcAddress(dllHandle,"PaymentReserve");
+	if(PaymentReserve==NULL) return -1222 ;
+
+	SetCardClientPropertiesEx2=(typeSetCardClientPropertiesEx2) GetProcAddress(dllHandle,"SetCardClientPropertiesEx2");
+	if(SetCardClientPropertiesEx2==NULL) return -1223;
+
+	GetSensorsCount=(typeGetSensorsCount) GetProcAddress(dllHandle,"GetSensorsCount");
+	if(GetSensorsCount==NULL) return -1224;
+
+	GetSensorByOrdinal=(typeGetSensorByOrdinal) GetProcAddress(dllHandle,"GetSensorByOrdinal");
+	if(GetSensorByOrdinal==NULL) return -1225;
+
+	GetSensorProperties=(typeGetSensorProperties) GetProcAddress(dllHandle,"GetSensorProperties");
+	if(GetSensorProperties==NULL) return -1226;
+
+	SetGradePropertiesEx=(typeSetGradePropertiesEx) GetProcAddress(dllHandle,"SetGradePropertiesEx");
+	if(SetGradePropertiesEx==NULL) return -1227;
+
+	SetTankPropertiesEx=(typeSetTankPropertiesEx) GetProcAddress(dllHandle,"SetTankPropertiesEx");
+	if(SetTankPropertiesEx==NULL) return -1228;
+
+	dllLoaded =	true ;
 
 	return 0;
 }
@@ -822,6 +845,7 @@ void CEZClient::Initializer()
 	GetDeliveryPropertiesEx				=	NULL;
 	GetDeliveryPropertiesEx2			=	NULL;
 	GetDeliveryPropertiesEx3			=	NULL;
+	GetDeliveryPropertiesEx4			=	NULL;
 	SetDeliveryProperties				=	NULL;
 	SetDeliveryPropertiesEx				=	NULL;
 	SetDeliveryPropertiesEx2			=	NULL;
@@ -883,6 +907,7 @@ void CEZClient::Initializer()
 	GetCardClientByOrdinal				=	NULL;
 	GetCardClientProperties				=	NULL;
 	SetCardClientProperties				=	NULL;
+	SetCardClientPropertiesEx2			=	NULL;
 	DeleteCardClient					=	NULL;
 	AllStop								=	NULL;
 	AllAuthorise						=	NULL;
@@ -938,33 +963,39 @@ void CEZClient::Initializer()
 	GetNextZB2GStatusEvent				=	NULL;
 	GetNextLogEventEvent				=	NULL;
 	GetNextDBTankStatusEventEx2			=	NULL;
-//	IsValidMACLicense					=	NULL;
+	PaymentAuthorise					=	NULL;
+	PaymentReserve						=	NULL;
+	GetSensorsCount						=	NULL;
+	GetSensorByOrdinal					=	NULL;
+	SetGradePropertiesEx				=	NULL;
+	SetTankPropertiesEx					=	NULL;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-// Retorna apontador para mensagem referente ao codigo de erro
-//   * no Windows atraves GetLastError()
-//   * no Linux usando errno
+// Returns pointer to message regarding error code
+//   * In Windows through GetLastError()
+//   * In Linux using erro
 //
-// parametros:
-//		erro      : codigo de erro
-//		lpszBuffer: ponteiro para buffer de armazenamento da mensagem
-//		dwSize    : comprimento do buffer
+// Parameters:
+//		error      :	Error code
+//		lpszBuffer :	Pointer to message store buffer
+//		dwSize     :	Buffer length
 //
-// retorna o ponteiro para buffer de mensagem.
-//
+// Returns pointer to message buffer.
 void CEZClient::GetLastErrorText(DWORD erro, LPTSTR lpszBuffer, DWORD dwSize)
 {
-#ifdef _WIN32 // no Windows
-  DWORD   dwRet, dwFlags;
-  LPTSTR  lpszTemp = NULL;
+#ifdef _WIN32
 
-    dwFlags = FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_ARGUMENT_ARRAY;
-    dwRet = FormatMessage(dwFlags, NULL, erro, LANG_NEUTRAL,(LPTSTR)&lpszTemp, 0, NULL);
+  DWORD   dwRet, dwFlags ;
+  LPTSTR  lpszTemp = NULL ;
 
-    if( !dwRet || ((long)dwSize<(long)dwRet+14) )
-      lpszBuffer[0] = TEXT('\0');
+    dwFlags = FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_ARGUMENT_ARRAY ;
+    dwRet = FormatMessage( dwFlags, NULL, erro, LANG_NEUTRAL,(LPTSTR)&lpszTemp, 0, NULL ) ;
+
+    if( !dwRet || ( (long) dwSize < (long) dwRet + 14 ) )
+      lpszBuffer[0] = TEXT('\0') ;
+
     else
     {
       lpszTemp[lstrlen(lpszTemp)-2] = TEXT('\0');
@@ -972,92 +1003,13 @@ void CEZClient::GetLastErrorText(DWORD erro, LPTSTR lpszBuffer, DWORD dwSize)
     }
 
     if( lpszTemp )
-      LocalFree((HLOCAL)lpszTemp);
-
-#endif // _WIN32
-
-#ifdef __linux__ // no Linux
-    strcpy(lpszBuffer, strerror(erro));
-#endif  // __linux__
-}
-
-//---------------------------------------------------------------------------------------
-// Le uma tecla a partir do console (STDIN) sem a necessidade de um ENTER para final
-//    * Similar a funcao "getch()"
-// retorna a tecla pressionada ou 0 (zero)
-char CEZClient::KBget()
-{
-	char   key = 0;        // buffer
-
-#if defined(__linux__)
-	struct termio old_tty; // Configuracao atual
-	struct termio new_tty; // configuracao nova
-
-	// le configuracao atual
-	if (ioctl(STDIN_FILENO, TCGETA, &old_tty) < 0)
-		return(0);
-
-	new_tty	= old_tty;
-
-	new_tty.c_iflag &= ~(IGNBRK | BRKINT | PARMRK | ISTRIP | INLCR | IGNCR | ICRNL | IXON);
-	new_tty.c_oflag &= ~OPOST;
-	new_tty.c_lflag &= ~(ECHO | ECHONL | ICANON | ISIG | IEXTEN);
-	new_tty.c_cflag &= ~(CSIZE | PARENB);
-	new_tty.c_cc[4]  = 01;
-
-	// ajusta os parametros para o nova
-	if (ioctl(STDIN_FILENO, TCSETA, &new_tty) < 0)
-		return(0);
-
-	// le 1 byte (tecla)
-	if(read(STDIN_FILENO, &key, sizeof(key)) < 0)
-		return(0);
-
-	// volta a configuracao original
-	if (ioctl(STDIN_FILENO, TCSETA, &old_tty) < 0)
-		return(0);
-
-#elif defined(_WIN32)
-
-	key = getch();
+      LocalFree( ( HLOCAL ) lpszTemp ) ;
 
 #endif
 
-	return(key);
-}
+#ifdef __linux__
 
-//------------------------------------------------------------------------------
-// Detecta se uma tecla foi pressionada no teclado (equivalente a funcao kbhit)
-// Nao para o aplicativo para esperar o pressionamento da tecla.
-// Retorna 1 (um) se uma tecla foi pressiona ou 0 (zero) se nada ocorre.
-int CEZClient::KBhit()
-{
-	int hkey = 0;
-
-#if defined(__linux__)
-    static const int STDIN = 0;
-    termios term;
-
-	if( !oldTerm.c_lflag )
-	{
-		tcgetattr(STDIN_FILENO, &term);
-		tcgetattr(STDIN_FILENO, &oldTerm);
-
-		term.c_lflag &= ~(ECHO | ICANON);
-
-		tcsetattr(STDIN_FILENO, TCSANOW, &term);
-	}
-
-    setbuf(stdin, NULL);
-
-    ioctl(STDIN_FILENO, FIONREAD, &hkey);
-
-#elif defined(_WIN32)
-
-	hkey = kbhit();
+    strcpy( lpszBuffer, strerror( erro ) ) ;
 
 #endif
-
-    return(hkey);
 }
-

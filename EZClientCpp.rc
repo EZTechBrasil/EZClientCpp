@@ -72,12 +72,12 @@ BEGIN
             VALUE "Comments", "Demostração de acesso a biblioteca EZClient.dll em C/C++"
             VALUE "CompanyName", "EZTech Tecnologia e Automacao LTDA"
             VALUE "FileDescription", "EZClient Application"
-            VALUE "FileVersion", "1, 0, 0, 1"
+            VALUE "FileVersion", "2, 1, 0, 0"
             VALUE "InternalName", "EZClient"
             VALUE "LegalCopyright", "Copyright (C) 2012"
             VALUE "OriginalFilename", "EZClient.exe"
             VALUE "ProductName", "EZClient Application"
-            VALUE "ProductVersion", "1, 0, 0, 1"
+            VALUE "ProductVersion", "2, 1, 0, 0"
         END
     END
     BLOCK "VarFileInfo"

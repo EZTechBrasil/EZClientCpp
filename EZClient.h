@@ -1,25 +1,36 @@
-/*****************************************************************
- *
- * Copyright (C) 2009-2010 EZTech Tecnologia e Automação Ltda. 
- * All rights reserved.
- *
- * Created 01/06/2005
- * 
- * File: EZClient.h 
- * Desc: EZClient.DLL API definitions header file  
- *
- * Visual SourceSafe details 
- * =========================
- *
- * $Header: /EZController.root/EZController/EZClientDLL/EZClient.h 1     17/04/07 13:55 Kelvin Ussher $
- * $History: EZClient.h $
- * 
- * *****************  Version 1  *****************
- * User: Kelvin Ussher Date: 17/04/07   Time: 13:55
- * Created in $/EZController.root/EZController/EZClientDLL
- * 
- * 
- ******************************************************************/
+//-----------------------------------------------------------------------------
+//
+//  Company     : EZTech Technology and Automation Ltda
+//        				 http://www.eztech.ind.br/
+//
+//
+//	Created     : 08/2012
+//  Updated		: 07/2017
+//
+//
+//  Description   : Class for library loading and access EZClient.dll
+//
+//	Parameters  :
+//
+//		EZClientCpp [/s addrEZServer] [/e]
+//
+//			/s : Passes the server's network address (default localhost)
+//			/e : Processes communication by events (default by pooling)
+//
+//  Comments :
+//
+//		*. To compile with GCC in Windows environment and the installation is necessary
+//			of the MinGW package (http://www.mingw.org/)
+//
+//		*. To compile with GCC for Windows or Linux use the Makefile script
+//			use the following commands:
+//
+//				> make clean      (Clean old objects)
+//				> make libinstall (Install libraries, Linux only)
+//				> make linux      (Linux 32bits platform)
+//				> make windows    (WIN32 platform)
+//
+//-----------------------------------------------------------------------------
 
 #ifndef __EZ_CLIENT_INTERFACE__
 #define __EZ_CLIENT_INTERFACE__
@@ -55,7 +66,6 @@ typedef void*					PVOID;
 #define FALSE   				0
 #define TRUE    				1
 
-// OVJ - 31/10/2012
 #define INT64  __int64
 
 #define WINAPI
@@ -67,10 +77,10 @@ typedef void*					PVOID;
 
 #define EZ_LIB_NAME "libezclient.so"
 
-// OVJ - 19/10/2012 - Funcoes de carga dinamica de bibliotecas
-#define  LoadLibrary(a)		dlopen(a, RTLD_LAZY)	// Carrega bibliote em memoria
-#define  GetProcAddress		dlsym					// Encontra apontador para funcao
-#define  FreeLibrary		dlclose					// Libera biblioteca da memoria
+// Functions of dynamic loading of libraries
+#define  LoadLibrary(a)		dlopen(a, RTLD_LAZY)	// Load libraries in memory
+#define  GetProcAddress		dlsym					// Find pointer to function
+#define  FreeLibrary		dlclose					// Free memory library
 
 //-----------------------------------------------------------------------------
 #elif defined(_WIN32)
@@ -83,13 +93,13 @@ typedef BSTR*			PBSTR ;
 
 	//--------------------------------------------------------------------------------------//
 
-	// Declaracao das funcoes da API EZForecourt
+	// Declaration of API functions EZForecourt
 
 	//--------------------------------- Connection -----------------------------------------//
 
-typedef long (WINAPI *typeClientLogon) ( long ClientID , short ClientType , HANDLE Event , HWND hWnd, unsigned int wMsg) ;
+typedef long (WINAPI *typeClientLogon) ( long clientID , short clientType , HANDLE eventHandle , HWND hWnd, unsigned int wMsg) ;
 
-typedef long (WINAPI *typeClientLogonEx) ( long ClientID , short ClientType , BSTR ServerName , unsigned short CallPortNo , unsigned short EventsPortNo , long CallTimeout, HANDLE Event , HWND hWnd, unsigned int wMsg) ;
+typedef long (WINAPI *typeClientLogonEx) ( long clientID , short clientType , BSTR serverName , unsigned short callPortNo , unsigned short eventsPortNo , long callTimeout, HANDLE eventHandle , HWND hWnd, unsigned int wMsg) ;
 
 typedef long (WINAPI *typeDllVersion) ( PBSTR pName ) ;
 
@@ -97,7 +107,7 @@ typedef long (WINAPI *typeServerVersion) ( PBSTR pName ) ;
 
 typedef long (WINAPI *typeClientLogoff) () ;
 
-typedef long (WINAPI *typeClientStatus) ( short* pPumpsReserved , short* pdeliveriesLocked ) ;
+typedef long (WINAPI *typeClientStatus) ( short* pPumpsReserved , short* pDeliveriesLocked ) ;
 
 typedef long (WINAPI *typeTestConnection) () ;
 
@@ -105,13 +115,13 @@ typedef long (WINAPI *typeLicenseStatus) () ;
 
 typedef long (WINAPI *typeGetLicenseType) ( short* pLicenseType ) ;
 
-typedef long (WINAPI *typeGetIniValue) ( BSTR Section , BSTR Key , PBSTR pValue ) ; 
+typedef long (WINAPI *typeGetIniValue) ( BSTR section , BSTR Key , PBSTR pValue ) ; 
 
-typedef long (WINAPI *typeSetIniValue) ( BSTR Section , BSTR Key , BSTR Value ) ; 
+typedef long (WINAPI *typeSetIniValue) ( BSTR section , BSTR Key , BSTR value ) ; 
 
 typedef long (WINAPI *typeGetClientsCount) ( long* pCount ) ;
 
-typedef long (WINAPI *typeSetDateTime) ( DATE DateTime ) ;
+typedef long (WINAPI *typeSetDateTime) ( DATE dateTime ) ;
 
 typedef long (WINAPI *typeGetDateTime) ( DATE* pDateTime ) ;
 
@@ -129,76 +139,76 @@ typedef long (WINAPI *typeGetNextEventType) ( short* pType ) ;
 
 typedef long (WINAPI *typeDiscardNextEvent) () ;
 
-typedef long (WINAPI *typeGetNextPumpEvent) ( long* pPumpID, short* pPumpNumber, short* pState, short* pReservedFor, long* pReservedBy, long* pHoseID ,
-							   short* pHoseNumber, long* pGradeID, PBSTR pGradeName , PBSTR pShortGradeName, short* pPriceLevel , double* pPrice, double* pVolume, 
+typedef long (WINAPI *typeGetNextPumpEvent) ( long* pPumpID, short* pPumpNumber, short* pState, short* pReservedFor, long* pReservedBy, long* phoseID ,
+							   short* phoseNumber, long* pGradeID, PBSTR pGradeName , PBSTR pShortGradeName, short* ppriceLevel , double* pPrice, double* pVolume, 
 							   double* pValue, short* pStackSize ) ;
 
-typedef long (WINAPI *typeGetNextPumpEventEx) ( long* pPumpID, short* pPumpNumber, short* pState, short* pReservedFor, long* pReservedBy, long* pHoseID ,
-							    short* pHoseNumber,long* pGradeID, PBSTR pGradeName , PBSTR pShortGradeName, short* pPriceLevel , double* pPrice, double* pVolume, 
+typedef long (WINAPI *typeGetNextPumpEventEx) ( long* pPumpID, short* pPumpNumber, short* pState, short* pReservedFor, long* pReservedBy, long* phoseID ,
+							    short* phoseNumber,long* pGradeID, PBSTR pGradeName , PBSTR pShortGradeName, short* ppriceLevel , double* pPrice, double* pVolume, 
 							    double* pValue, short* pStackSize , PBSTR pPumpName , short* pPhysicalNumber , short* pSide , short* pAddress, 
-								short* pPriceLevel1 , short* pPriceLevel2 , short* pType , long* pPortID , short* pAuthMode , short* pStackMode ,  short* pPrepayAllowed, 
+								short* ppriceLevel1 , short* pPriceLevel2 , short* pType , long* pPortID , short* pAuthMode , short* pStackMode ,  short* pPrepayAllowed, 
 								short* pPreauthAllowed ,  short* pPriceFormat , short* pValueFormat , short* pVolumeFormat  ) ;
 
-typedef long (WINAPI *typeGetNextPumpEventEx2) ( long* pPumpID, long* pPumpNumber, short* pState, short* pReservedFor, long* pReservedBy, long* pHoseID ,
-							    long* pHoseNumber,long* pHosePhysicalNumber,long* pGradeID,long* pGradeNumber, PBSTR pGradeName , PBSTR pShortGradeName, short* pPriceLevel , double* pPrice, double* pVolume, 
+typedef long (WINAPI *typeGetNextPumpEventEx2) ( long* pPumpID, long* pPumpNumber, short* pState, short* pReservedFor, long* pReservedBy, long* phoseID ,
+							    long* phoseNumber,long* pHosePhysicalNumber,long* pGradeID,long* pGradeNumber, PBSTR pGradeName , PBSTR pShortGradeName, short* ppriceLevel , double* pPrice, double* pVolume, 
 							    double* pValue, short* pStackSize , PBSTR pPumpName , long* pPhysicalNumber , short* pSide , short* pAddress, 
-								short* pPriceLevel1 , short* pPriceLevel2 , short* pType , long* pPortID , short* pAuthMode , short* pStackMode ,  short* pPrepayAllowed, 
+								short* ppriceLevel1 , short* pPriceLevel2 , short* pType , long* pPortID , short* pAuthMode , short* pStackMode ,  short* pPrepayAllowed, 
 								short* pPreauthAllowed ,  short* pPriceFormat , short* pValueFormat , short* pVolumeFormat , __int64* pTag , 
-							    long* pAttendantID , long* pAttendantNumber , PBSTR pAttendantName, __int64* pAttendantTag ,
-							    long* pCardClientID , long* pCardClientNumber , PBSTR pCardClientName, __int64* pCardClientTag  ) ;
+							    long* pattendantID , long* pAttendantNumber , PBSTR pAttendantName, __int64* pattendantTag ,
+							    long* pcardClientID , long* pCardClientNumber , PBSTR pCardClientName, __int64* pcardClientTag  ) ;
 
-typedef long (WINAPI *typeGetNextPumpEventEx3) ( long* pPumpID, long* pPumpNumber, short* pState, short* pReservedFor, long* pReservedBy, long* pHoseID ,
-							    long* pHoseNumber,long* pHosePhysicalNumber,long* pGradeID,long* pGradeNumber, PBSTR pGradeName , PBSTR pShortGradeName, short* pPriceLevel , double* pPrice, double* pVolume, 
+typedef long (WINAPI *typeGetNextPumpEventEx3) ( long* pPumpID, long* pPumpNumber, short* pState, short* pReservedFor, long* pReservedBy, long* phoseID ,
+							    long* phoseNumber,long* pHosePhysicalNumber,long* pGradeID,long* pGradeNumber, PBSTR pGradeName , PBSTR pShortGradeName, short* ppriceLevel , double* pPrice, double* pVolume, 
 							    double* pValue, short* pStackSize , PBSTR pPumpName , long* pPhysicalNumber , short* pSide , short* pAddress, 
-								short* pPriceLevel1 , short* pPriceLevel2 , short* pType , long* pPortID , short* pAuthMode , short* pStackMode ,  short* pPrepayAllowed, 
+								short* ppriceLevel1 , short* pPriceLevel2 , short* pType , long* pPortID , short* pAuthMode , short* pStackMode ,  short* pPrepayAllowed, 
 								short* pPreauthAllowed ,  short* pPriceFormat , short* pValueFormat , short* pVolumeFormat , __int64* pTag , 
-							    long* pAttendantID , long* pAttendantNumber , PBSTR pAttendantName, __int64* pAttendantTag ,
-							    long* pCardClientID , long* pCardClientNumber , PBSTR pCardClientName, __int64* pCardClientTag , 
+							    long* pattendantID , long* pAttendantNumber , PBSTR pAttendantName, __int64* pattendantTag ,
+							    long* pcardClientID , long* pCardClientNumber , PBSTR pCardClientName, __int64* pcardClientTag , 
 								double* pCurFlowRate , double* pPeakFlowRate ) ;
 
-typedef long (WINAPI *typeGetNextDeliveryEvent) ( long* pDeliveryID , long* pPumpID, short* pPumpNumber, long* pHoseID, short* pHoseNumber , 
-								long* pGradeID, PBSTR pGradeName ,PBSTR pShortGradeName, short* pPriceLevel, double* pPrice, double* pVolume, double* pValue, 
-								short* pDeliveryState , short* pDeliveryType, long* pLockedBy, long* pReservedBy, long* pAge , DATE* pCompletedDT , long* pAttendantID ) ;
+typedef long (WINAPI *typeGetNextDeliveryEvent) ( long* pDeliveryID , long* pPumpID, short* pPumpNumber, long* phoseID, short* phoseNumber , 
+								long* pGradeID, PBSTR pGradeName ,PBSTR pShortGradeName, short* ppriceLevel, double* pPrice, double* pVolume, double* pValue, 
+								short* pDeliveryState , short* pDeliveryType, long* pLockedBy, long* pReservedBy, long* pAge , DATE* pCompletedDT , long* pattendantID ) ;
 
-typedef long (WINAPI *typeGetNextDeliveryEventEx) ( long* pDeliveryID , long* pPumpID, short* pPumpNumber, long* pHoseID, short* pHoseNumber , 
-								    long* pGradeID, PBSTR pGradeName , PBSTR pShortGradeName, short* pPriceLevel, double* pPrice, 
+typedef long (WINAPI *typeGetNextDeliveryEventEx) ( long* pDeliveryID , long* pPumpID, short* pPumpNumber, long* phoseID, short* phoseNumber , 
+								    long* pGradeID, PBSTR pGradeName , PBSTR pShortGradeName, short* ppriceLevel, double* pPrice, 
 									double* pVolume, double* pValue, short* pDeliveryState , 
 								    short* pDeliveryType, long* pLockedBy, long* pReservedBy, long* pAge , DATE* pCompletedDT , 
-									long* pAttendantID, double* pVolumeETot , double* pVolume2ETot , double* pValueETot , __int64* pTag) ;
+									long* pattendantID, double* pVolumeETot , double* pVolume2ETot , double* pValueETot , __int64* pTag) ;
 
-typedef long (WINAPI *typeGetNextDeliveryEventEx2) ( long* pDeliveryID , long* pPumpID, short* pPumpNumber, long* pHoseID, short* pHoseNumber , 
-								     long* pGradeID, PBSTR pGradeName , PBSTR pShortGradeName, short* pPriceLevel, double* pPrice, 
+typedef long (WINAPI *typeGetNextDeliveryEventEx2) ( long* pDeliveryID , long* pPumpID, short* pPumpNumber, long* phoseID, short* phoseNumber , 
+								     long* pGradeID, PBSTR pGradeName , PBSTR pShortGradeName, short* ppriceLevel, double* pPrice, 
 									 double* pVolume, double* pValue, short* pDeliveryState , 
 								     short* pDeliveryType, long* pLockedBy, long* pReservedBy, long* pAge , DATE* pCompletedDT , 
-									 long* pAttendantID, 
+									 long* pattendantID, 
 									 double* pOldVolumeETot , double* pOldVolume2ETot , double* pOldValueETot , 
 									 double* pNewVolumeETot , double* pNewVolume2ETot , double* pNewValueETot , 
 									 __int64* pTag , long* pDuration ) ;
 
 typedef long (WINAPI *typeGetNextDeliveryEventEx3) ( long* pDeliveryID, 
-									    long* pHoseID ,long* pHoseNumber, long* pHosePhysicalNumber,
+									    long* phoseID ,long* phoseNumber, long* pHosePhysicalNumber,
 	  									long* pPumpID, long* pPumpNumber, PBSTR pPumpName,
 										long* pTankID, long* pTankNumber, PBSTR pTankName,
-										long* pGradeID , long* pGradeNumber, PBSTR pGradeName, PBSTR pGradeShortName, PBSTR pGradeCode,
-										short* pState ,short* pType ,double* pVolume ,short* pPriceLevel ,
+										long* pGradeID , long* pGradeNumber, PBSTR pGradeName, PBSTR pGradeshortName, PBSTR pGradeCode,
+										short* pState ,short* pType ,double* pVolume ,short* ppriceLevel ,
 										double* pPrice ,double* pValue ,double* pVolume2 , DATE* pCompletedDT , long* pLockedBy, 
-										long* pReservedBy , long* pAttendantID , long* pAge , DATE* pClearedDT , 
+										long* pReservedBy , long* pattendantID , long* pAge , DATE* pClearedDT , 
 										double* pOldVolumeETot, double* pOldVolume2ETot, double* pOldValueETot , 
 										double* pNewVolumeETot, double* pNewVolume2ETot, double* pNewValueETot , 
-										__int64* pTag , long* pDuration , long* pAttendantNumber , PBSTR AttendantName, __int64* pAttendantTag ,
-										long* pCardClientID , long* pCardClientNumber , PBSTR CardClientName, __int64* pCardClientTag ) ; 
+										__int64* pTag , long* pDuration , long* pAttendantNumber , PBSTR AttendantName, __int64* pattendantTag ,
+										long* pcardClientID , long* pCardClientNumber , PBSTR CardClientName, __int64* pcardClientTag ) ; 
 
-typedef long (WINAPI *typeGetNextDeliveryEventEx4) ( long* pDeliveryID, long* pHoseID ,long* pHoseNumber, long* pHosePhysicalNumber,
+typedef long (WINAPI *typeGetNextDeliveryEventEx4) ( long* pDeliveryID, long* phoseID ,long* phoseNumber, long* pHosePhysicalNumber,
 	  									long* pPumpID, long* pPumpNumber, PBSTR pPumpName,
 										long* pTankID, long* pTankNumber, PBSTR pTankName,
-										long* pGradeID , long* pGradeNumber, PBSTR pGradeName, PBSTR pGradeShortName, PBSTR pGradeCode,
-										short* pState ,short* pType ,double* pVolume ,short* pPriceLevel ,
+										long* pGradeID , long* pGradeNumber, PBSTR pGradeName, PBSTR pGradeshortName, PBSTR pGradeCode,
+										short* pState ,short* pType ,double* pVolume ,short* ppriceLevel ,
 										double* pPrice ,double* pValue ,double* pVolume2 , DATE* pCompletedDT , long* pLockedBy, 
-										long* pReservedBy , long* pAttendantID , long* pAge , DATE* pClearedDT , 
+										long* pReservedBy , long* pattendantID , long* pAge , DATE* pClearedDT , 
 										double* pOldVolumeETot, double* pOldVolume2ETot, double* pOldValueETot , 
 										double* pNewVolumeETot, double* pNewVolume2ETot, double* pNewValueETot , 
-										__int64* pTag , long* pDuration , long* pAttendantNumber , PBSTR AttendantName, __int64* pAttendantTag ,
-										long* pCardClientID , long* pCardClientNumber , PBSTR CardClientName, __int64* pCardClientTag , double* pPeakFlowRate) ;
+										__int64* pTag , long* pDuration , long* pAttendantNumber , PBSTR AttendantName, __int64* pattendantTag ,
+										long* pcardClientID , long* pCardClientNumber , PBSTR CardClientName, __int64* pcardClientTag , double* pPeakFlowRate) ;
 
 typedef long (WINAPI *typeGetNextServerEvent) ( long* pEventID, PBSTR pEventText ) ;
 
@@ -208,26 +218,26 @@ typedef long (WINAPI *typeFireClientEvent) ( long EventID , BSTR EventStr ) ;
 
 typedef long (WINAPI *typeGetNextDBLogEvent) ( long* pEventType , long* pDeviceID , DATE* pEventDT , PBSTR pEventText ) ;
 
-typedef long (WINAPI *typeGetNextDBLogDeliveryEvent) ( long* pDeliveryID, long* pHoseID, short* pDeliveryState, short* pDeliveryType, double* pVolume, short* pPriceLevel, 
-							 double* pPrice, double* pValue, double* pVolume2, long* pReservedBy , long* pAttendantID, DATE* pDeliveryDT ) ;
+typedef long (WINAPI *typeGetNextDBLogDeliveryEvent) ( long* pDeliveryID, long* phoseID, short* pDeliveryState, short* pDeliveryType, double* pVolume, short* ppriceLevel, 
+							 double* pPrice, double* pValue, double* pVolume2, long* pReservedBy , long* pattendantID, DATE* pDeliveryDT ) ;
 
-typedef long (WINAPI *typeGetNextDBClearDeliveryEvent) ( long* pDeliveryID, short* pDeliveryType, long* pClearedBY, DATE* pClearedDT, long* pAttendantID ) ;
+typedef long (WINAPI *typeGetNextDBClearDeliveryEvent) ( long* pDeliveryID, short* pDeliveryType, long* pClearedBY, DATE* pClearedDT, long* pattendantID ) ;
 
-typedef long (WINAPI *typeGetNextZB2GStatusEvent) ( long* pPortID , __int64* pZBAddress, short* pLQI , short* pRSSI , __int64*  pParZBAddress, short* pZBChannel , short* pMemBlocks , short* pMemFree ) ;
+typedef long (WINAPI *typeGetNextZB2GStatusEvent) ( long* pPortID , __int64* pZBAddress, short* pLQI , short* pRSSI , __int64*  pParZBAddress, short* pzigbeeChannel , short* pMemBlocks , short* pMemFree ) ;
 
 typedef long (WINAPI *typeGetNextDBStackDeliveryEvent) ( long* pDeliveryID ) ;
 
-typedef long (WINAPI *typeGetNextDBHoseETotalsEvent) ( long* pHoseID , double* pVolume , double* pValue , double* pVolumeETot , double* pValueETot ) ;
+typedef long (WINAPI *typeGetNextDBHoseETotalsEvent) ( long* phoseID , double* pVolume , double* pValue , double* pVolumeETot , double* pValueETot ) ;
 
-typedef long (WINAPI *typeGetNextDBHoseETotalsEventEx) ( long* pHoseID , double* pVolume , double* pValue , double* pVolumeETot , double* pValueETot , 
-										 long* pHoseNumber , long* pHosePhysicalNumber , long* pPumpID , long* pPumpNumber , PBSTR pPumpName , 
+typedef long (WINAPI *typeGetNextDBHoseETotalsEventEx) ( long* phoseID , double* pVolume , double* pValue , double* pVolumeETot , double* pValueETot , 
+										 long* phoseNumber , long* pHosePhysicalNumber , long* pPumpID , long* pPumpNumber , PBSTR pPumpName , 
 										 long* pTankID , long* pTankNumber , PBSTR pTankName , long* pGradeID , PBSTR pGradeName ) ;
 
 typedef long (WINAPI *typeGetNextDBTriggerEvent) ( long* pTableID ,long* pRowID ) ;
 
-typedef long (WINAPI *typeGetNextDBAttendantLogonEvent) ( long* pAttendantID ,long* pPumpID ) ;
+typedef long (WINAPI *typeGetNextDBAttendantLogonEvent) ( long* pattendantID ,long* pPumpID ) ;
 
-typedef long (WINAPI *typeGetNextDBAttendantLogoffEvent) ( long* pAttendantID ) ;
+typedef long (WINAPI *typeGetNextDBAttendantLogoffEvent) ( long* pattendantID ) ;
 
 typedef long (WINAPI *typeGetNextDBTankStatusEvent) ( long* pTankID , double* pGaugeVolume , double* pGaugeTCVolume, double* pGaugeUllage, double* pGaugeTemperature , 
 							          double* pGaugeLevel , double* pGaugeWaterVolume, double* pGaugeWaterLevel ) ;
@@ -248,71 +258,71 @@ typedef long (WINAPI *typeGetNextLogEventEvent) ( long* pLogEventID , short* pDe
 								     short* pEventType , PBSTR pEventDesc , DATE* pGeneratedDT , DATE* pClearedDT , long* pClearedBy , long* pAckedBy , double* pVolume ,
 								     double* pValue , double* pProductVolume , double* pProductLevel , double* pWaterLevel , double* pTemperature) ;
 
-typedef long (WINAPI *typeGetNextZeroDeliveryEvent) ( long* pPumpID , long* pPumpNumber , long* pHoseID , long* pHoseNumber ) ;
+typedef long (WINAPI *typeGetNextZeroDeliveryEvent) ( long* pPumpID , long* pPumpNumber , long* phoseID , long* phoseNumber ) ;
 
 	//--------------------------------- Pumps ---------------------------------------------//
 
 typedef long (WINAPI *typeGetPumpsCount) ( long* pCount ) ;
 
-typedef long (WINAPI *typeGetPumpByNumber) ( long Number , long* pID ) ;
+typedef long (WINAPI *typeGetPumpByNumber) ( long number , long* pID ) ;
 
-typedef long (WINAPI *typeGetPumpByName) ( BSTR Name , long* pID ) ;
+typedef long (WINAPI *typeGetPumpByName) ( BSTR name , long* pID ) ;
 
-typedef long (WINAPI *typeGetPumpByOrdinal) ( long Index , long* pID ) ;
+typedef long (WINAPI *typeGetPumpByOrdinal) ( long idx , long* pID ) ;
 
-typedef long (WINAPI *typeGetPumpProperties) (long ID , long* pNumber, PBSTR pName, short* pPhysicalNumber, short* pSide, short* pAddress, short* pPriceLevel1,
+typedef long (WINAPI *typeGetPumpProperties) (long ID , long* pNumber, PBSTR pName, short* pPhysicalNumber, short* pSide, short* pAddress, short* ppriceLevel1,
 						      short* pPriceLevel2, short* pPriceDspFormat, short* pVolumeDspFormat, short* pValueDspFormat, short* pType,  
-						      long* pPortID, long* pAttendantID, short* pAuthMode, short* pStackMode, short* pPrepayAllowed, short* pPreauthAllowed ) ;
+						      long* pPortID, long* pattendantID, short* pAuthMode, short* pStackMode, short* pPrepayAllowed, short* pPreauthAllowed ) ;
 
-typedef long (WINAPI *typeGetPumpPropertiesEx) (long ID , long* pNumber, PBSTR pName, short* pPhysicalNumber, short* pSide, short* pAddress, short* pPriceLevel1,
+typedef long (WINAPI *typeGetPumpPropertiesEx) (long ID , long* pNumber, PBSTR pName, short* pPhysicalNumber, short* pSide, short* pAddress, short* ppriceLevel1,
 						      short* pPriceLevel2, short* pPriceDspFormat, short* pVolumeDspFormat, short* pValueDspFormat, short* pType, 
-						      long* pPortID, long* pAttendantID, short* pAuthMode, short* pStackMode, short* pPrepayAllowed, short* pPreauthAllowed ,
-							  long* pSlotZigBeeID , long* pMuxSlotZigBeeID , short* pPriceControl , short* pHasPreset) ;
+						      long* pPortID, long* pattendantID, short* pAuthMode, short* pStackMode, short* pPrepayAllowed, short* pPreauthAllowed ,
+							  long* pSlotZigbeeID , long* pmuxSlotZigBeeID , short* ppriceControl , short* phasPreset) ;
 
-typedef long (WINAPI *typeSetPumpProperties) (long ID , long Number, BSTR Name, short PhysicalNumber, short Side, short Address, short PriceLevel1,
-						      short PriceLevel2, short PriceDspFormat, short VolumeDspFormat, short ValueDspFormat, short Type, 
-						      long PortID, long AttendantID, short AuthMode, short StackMode, short PrepayAllowed, short PreauthAllowed ) ;
+typedef long (WINAPI *typeSetPumpProperties) (long ID , long number, BSTR name, short physicalNumber, short side, short address, short priceLevel1,
+						      short priceLevel2, short priceDspFormat, short volumeDspFormat, short valueDspFormat, short type, 
+						      long portID, long attendantID, short authMode, short stackMode, short prepayAllowed, short preauthAllowed ) ;
 
-typedef long (WINAPI *typeSetPumpPropertiesEx) (long ID , long Number, BSTR Name, short PhysicalNumber, short Side, short Address, short PriceLevel1,
-						        short PriceLevel2, short PriceDspFormat, short VolumeDspFormat, short ValueDspFormat, short Type, 
-						        long PortID, long AttendantID, short AuthMode, short StackMode, short PrepayAllowed, short PreauthAllowed , 
-								long SlotZigBeeID , long MuxSlotZigBeeID , short PriceControl , short HasPreset ) ;
+typedef long (WINAPI *typeSetPumpPropertiesEx) (long ID , long number, BSTR name, short physicalNumber, short side, short address, short priceLevel1,
+						        short priceLevel2, short priceDspFormat, short volumeDspFormat, short valueDspFormat, short type, 
+						        long portID, long attendantID, short authMode, short stackMode, short prepayAllowed, short preauthAllowed , 
+								long slotZigBeeID , long muxSlotZigBeeID , short priceControl , short hasPreset ) ;
 
 typedef long (WINAPI *typeDeletePump) ( long ID ) ;
 
 typedef long (WINAPI *typeGetPumpHosesCount) ( long ID , long* pCount ) ;
 
-typedef long (WINAPI *typeGetPumpHoseByNumber) ( long ID , long Number , long* pHoseID ) ;
+typedef long (WINAPI *typeGetPumpHoseByNumber) ( long ID , long number , long* phoseID ) ;
 
-typedef long (WINAPI *typeGetPumpStatus) ( long ID , short* pState, short* pReservedFor, long* pReservedBy, long* pHoseID, short* pHoseNumber , 
-						   long* pGradeID, PBSTR pGradeName ,PBSTR pShortGradeName, short* pPriceLevel , double* pPrice , double* pVolume , double* pValue , 
+typedef long (WINAPI *typeGetPumpStatus) ( long ID , short* pState, short* pReservedFor, long* pReservedBy, long* phoseID, short* phoseNumber , 
+						   long* pGradeID, PBSTR pGradeName ,PBSTR pShortGradeName, short* ppriceLevel , double* pPrice , double* pVolume , double* pValue , 
 						   short* pStackSize ) ;
 
-typedef long (WINAPI *typeGetPumpStatusEx) ( long ID , long* pPumpNumber, PBSTR pPumpName, long* pPhysicalNumber, short* pState, short* pReservedFor, long* pReservedBy, long* pHoseID, long* pHoseNumber , long* pHosePhysicalNumber , long* pGradeID , 
-						     long* pGradeNumber , PBSTR pGradeName, PBSTR pShortGradeName, short* pPriceLevel , double* pPrice , double* pVolume , double* pValue , 
+typedef long (WINAPI *typeGetPumpStatusEx) ( long ID , long* pPumpNumber, PBSTR pPumpName, long* pPhysicalNumber, short* pState, short* pReservedFor, long* pReservedBy, long* phoseID, long* phoseNumber , long* pHosePhysicalNumber , long* pGradeID , 
+						     long* pGradeNumber , PBSTR pGradeName, PBSTR pShortGradeName, short* ppriceLevel , double* pPrice , double* pVolume , double* pValue , 
 						     short* pStackSize , __int64* pTag , 
-						     long* pAttendantID , long* pAttendantNumber , PBSTR pAttendantName, __int64* pAttendantTag ,
-						     long* pCardClientID , long* pCardClientNumber , PBSTR pCardClientName, __int64* pCardClientTag ) ;
+						     long* pattendantID , long* pAttendantNumber , PBSTR pAttendantName, __int64* pattendantTag ,
+						     long* pcardClientID , long* pCardClientNumber , PBSTR pCardClientName, __int64* pcardClientTag ) ;
 
-typedef long (WINAPI *typeGetPumpStatusEx2) ( long ID , long* pPumpNumber, PBSTR pPumpName, long* pPhysicalNumber, short* pState, short* pReservedFor, long* pReservedBy, long* pHoseID, long* pHoseNumber , long* pHosePhysicalNumber , long* pGradeID , 
-							  long* pGradeNumber , PBSTR pGradeName, PBSTR pShortGradeName, short* pPriceLevel , double* pPrice , double* pVolume , double* pValue , short* pStackSize , __int64* pTag , 
-							  long* pAttendantID , long* pAttendantNumber , PBSTR pAttendantName, __int64* pAttendantTag ,
-							  long* pCardClientID , long* pCardClientNumber , PBSTR pCardClientName, __int64* pCardClientTag , 
+typedef long (WINAPI *typeGetPumpStatusEx2) ( long ID , long* pPumpNumber, PBSTR pPumpName, long* pPhysicalNumber, short* pState, short* pReservedFor, long* pReservedBy, long* phoseID, long* phoseNumber , long* pHosePhysicalNumber , long* pGradeID , 
+							  long* pGradeNumber , PBSTR pGradeName, PBSTR pShortGradeName, short* ppriceLevel , double* pPrice , double* pVolume , double* pValue , short* pStackSize , __int64* pTag , 
+							  long* pattendantID , long* pAttendantNumber , PBSTR pAttendantName, __int64* pattendantTag ,
+							  long* pcardClientID , long* pCardClientNumber , PBSTR pCardClientName, __int64* pcardClientTag , 
 							  double* pCurFlowRate , double* pPeakFlowRate ) ;
 
-typedef BSTR (WINAPI *typePumpStateString) ( short State ) ;
+typedef BSTR (WINAPI *typePumpStateString) ( short state ) ;
 
 typedef long (WINAPI *typeEnablePump) ( long ID ) ;
 
 typedef long (WINAPI *typeDisablePump) ( long ID ) ;
 
-typedef long (WINAPI *typeSetPumpDefaultPriceLevel) ( long ID , short Level ) ;
+typedef long (WINAPI *typeSetPumpDefaultPriceLevel) ( long ID , short level ) ;
 
 typedef long (WINAPI *typeGetDensity) ( long ID , double* pDensity) ;
 
-typedef long (WINAPI *typeScheduleBeep) ( long ID , short Pitch1 , short Duration1 , short Pitch2 , short Duration2, short Pitch3 , short Duration3, short Pitch4 , short Duration4, short Pitch5 , short Duration5  ) ;
+typedef long (WINAPI *typeScheduleBeep) ( long ID , short pitch1 , short duration1 , short pitch2 , short duration2, short pitch3 , short duration3, short pitch4 , short duration4, short pitch5 , short duration5  ) ;
 
-typedef long (WINAPI *typeFlashLEDS) ( long ID , short Side , short PeriodMs , short Cycles )  ;
+typedef long (WINAPI *typeFlashLEDS) ( long ID , short side , short periodMs , short cycles )  ;
 
 	//--------------------------- Pump prepay deliveries ----------------------------------//
 
@@ -320,7 +330,7 @@ typedef long (WINAPI *typePrepayReserve) ( long ID ) ;
 
 typedef long (WINAPI *typePrepayCancel) ( long ID  ) ;
 
-typedef long (WINAPI *typePrepayAuthorise) ( long ID , short LimitType , double Value , short Hose , short PriceLevel ) ;
+typedef long (WINAPI *typePrepayAuthorise) ( long ID , short limitType , double value , short hose , short priceLevel ) ;
 
 	//--------------------------- Pump preauth deliveries ---------------------------------//
 
@@ -328,26 +338,27 @@ typedef long (WINAPI *typePreauthReserve) ( long ID ) ;
 
 typedef long (WINAPI *typePreauthCancel) ( long ID ) ;
 
-typedef long (WINAPI *typePreauthAuthorise) ( long ID , short LimitType , double Value , short Hose , short PriceLevel ) ;
+typedef long (WINAPI *typePreauthAuthorise) ( long ID , short limitType , double value , short hose , short priceLevel ) ;
 
 	//--------------------------- Pump payment deliveries ---------------------------------//
 
-typedef long (WINAPI *typePaymentReserve) ( long ID , long TermID , BSTR TermHash ) ;
+typedef long (WINAPI *typePaymentReserve) ( long ID , long termID , BSTR termHash ) ;
 
-typedef long (WINAPI *typePaymentCancel) ( long ID , long TermID , BSTR TermHash ) ;
+typedef long (WINAPI *typePaymentCancel) ( long ID , long termID , BSTR termHash ) ;
 
-typedef long (WINAPI *typePaymentAuthorise) ( long ID , long TermID , BSTR TermHash ,
-							  long AttendantID , __int64 AttendantTag , 
-							  long CardClientID , __int64 CardClientTag , 
-							  short AuthType , __int64 ExtTag ,
-							  short GradeType , short PriceType  , short PriceLevel , double Price , 
-							  short PresetType , double Value , short Hose ,
-							  double Odometer , double Odometer2 , BSTR Plate , 
-							  BSTR ExtTransactionID , BSTR DriverID , BSTR AuthorisationID ) ;
+typedef long (WINAPI *typePaymentAuthorise) ( long ID , long termID , BSTR termHash ,
+							  long attendantID , __int64 attendantTag , 
+							  long cardClientID , __int64 cardClientTag , 
+							  short authType , __int64 extTag , 
+							  short gradeType , short priceType,
+							  short priceLevel, double price, 
+							  short presetType , double value , short hose ,
+							  double odometer , double odometer2 , BSTR plate , 
+							  BSTR extTransactionID , BSTR driverID , BSTR authorisationID ) ;
 
 	//------------------------------ Pump authorization ------------------------------------//
 
-typedef long (WINAPI *typeAttendantAuthorise) ( long ID , long AttendantID ) ;
+typedef long (WINAPI *typeAttendantAuthorise) ( long ID , long attendantID ) ;
 
 typedef long (WINAPI *typeAuthorise) ( long ID ) ;
 
@@ -359,11 +370,11 @@ typedef long (WINAPI *typeReAuthorise) ( long ID ) ;
 
 typedef long (WINAPI *typeTerminateDelivery) ( long ID ) ;
 
-typedef long (WINAPI *typeLoadPreset) ( long ID , short LimitType , double Value , short Hose , short PriceLevel ) ;
+typedef long (WINAPI *typeLoadPreset) ( long ID , short limitType , double Value , short Hose , short priceLevel ) ;
 
-typedef long (WINAPI *typeLoadPresetWithPrice) ( long ID , short LimitType , double Value , short Hose , short PriceLevel , double Price ) ;
+typedef long (WINAPI *typeLoadPresetWithPrice) ( long ID , short limitType , double Value , short Hose , short priceLevel , double Price ) ;
 
-typedef long (WINAPI *typeTagAuthorise) ( long ID , __int64 Tag , short LimitType , double Value , short Hose , short PriceLevel ) ;
+typedef long (WINAPI *typeTagAuthorise) ( long ID , __int64 Tag , short limitType , double Value , short Hose , short priceLevel ) ;
 
 	//-------------------------------- Global functions ------------------------------------//
 
@@ -385,63 +396,63 @@ typedef long (WINAPI *typeGetDeliveriesCount) ( long* pCount ) ;
 
 typedef long (WINAPI *typeGetDeliveryByOrdinal) ( long Index , long* pID ) ;
 
-typedef long (WINAPI *typeGetDeliveryProperties) ( long ID , long* pHoseID ,short* pState ,short* pType ,double* pVolume ,
-								   short* pPriceLevel ,double* pPrice ,double* pValue ,double* pVolume2 , 
-								   DATE* pCompletedDT ,long* pLockedBy , long* pReservedBy , long* pAttendantID , long* pAge ) ;
+typedef long (WINAPI *typeGetDeliveryProperties) ( long ID , long* phoseID ,short* pState ,short* pType ,double* pVolume ,
+								   short* ppriceLevel ,double* pPrice ,double* pValue ,double* pVolume2 , 
+								   DATE* pCompletedDT ,long* pLockedBy , long* pReservedBy , long* pattendantID , long* pAge ) ;
 
-typedef long (WINAPI *typeGetDeliveryPropertiesEx) ( long ID , long* pHoseID ,short* pState ,short* pType ,double* pVolume ,short* pPriceLevel ,
-									 double* pPrice ,double* pValue ,double* pVolume2 , DATE* pCompletedDT ,long* pLockedBy, long* pReservedBy , long* pAttendantID , long* pAge , 
+typedef long (WINAPI *typeGetDeliveryPropertiesEx) ( long ID , long* phoseID ,short* pState ,short* pType ,double* pVolume ,short* ppriceLevel ,
+									 double* pPrice ,double* pValue ,double* pVolume2 , DATE* pCompletedDT ,long* pLockedBy, long* pReservedBy , long* pattendantID , long* pAge , 
 									 DATE* pClearedDT ,double* pVolumeETot , double* pVolume2ETot , double* pValueETot , __int64* pTag ) ;
 
-typedef long (WINAPI *typeGetDeliveryPropertiesEx2) ( long ID , long* pHoseID ,short* pState ,short* pType ,double* pVolume ,short* pPriceLevel ,
+typedef long (WINAPI *typeGetDeliveryPropertiesEx2) ( long ID , long* phoseID ,short* pState ,short* pType ,double* pVolume ,short* ppriceLevel ,
 									  double* pPrice ,double* pValue ,double* pVolume2 , DATE* pCompletedDT ,long* pLockedBy, long* pReservedBy , 
-									  long* pAttendantID , long* pAge , DATE* pClearedDT ,
+									  long* pattendantID , long* pAge , DATE* pClearedDT ,
 									  double* pOldVolumeETot , double* pOldVolume2ETot , double* pOldValueETot , 
 									  double* pNewVolumeETot , double* pNewVolume2ETot , double* pNewValueETot , 
 									  __int64* pTag , long * pDuration ) ;
 
-typedef long (WINAPI *typeGetDeliveryPropertiesEx3) ( long ID , long* pHoseID ,short* pState ,short* pType ,double* pVolume ,short* pPriceLevel ,
+typedef long (WINAPI *typeGetDeliveryPropertiesEx3) ( long ID , long* phoseID ,short* pState ,short* pType ,double* pVolume ,short* ppriceLevel ,
 									  double* pPrice ,double* pValue ,double* pVolume2 , DATE* pCompletedDT ,long* pLockedBy, long* pReservedBy , 
-									  long* pAttendantID , long* pAge , DATE* pClearedDT ,
+									  long* pattendantID , long* pAge , DATE* pClearedDT ,
 									  double* pOldVolumeETot , double* pOldVolume2ETot , double* pOldValueETot , 
 									  double* pNewVolumeETot , double* pNewVolume2ETot , double* pNewValueETot , 
-									  __int64* pTag , long * pDuration , long* pCardClientID ) ;
+									  __int64* pTag , long * pDuration , long* pcardClientID ) ;
 
-typedef long (WINAPI *typeGetDeliveryPropertiesEx4) ( long ID , long* pHoseID ,short* pState ,short* pType ,double* pVolume ,short* pPriceLevel ,
+typedef long (WINAPI *typeGetDeliveryPropertiesEx4) ( long ID , long* phoseID ,short* pState ,short* pType ,double* pVolume ,short* ppriceLevel ,
 									  double* pPrice ,double* pValue ,double* pVolume2 , DATE* pCompletedDT ,long* pLockedBy, long* pReservedBy , 
-									  long* pAttendantID , long* pAge , DATE* pClearedDT ,
+									  long* pattendantID , long* pAge , DATE* pClearedDT ,
 									  double* pOldVolumeETot , double* pOldVolume2ETot , double* pOldValueETot , 
 									  double* pNewVolumeETot , double* pNewVolume2ETot , double* pNewValueETot , 
-									  __int64* pTag , long * pDuration , long* pCardClientID , double* pPeakFlowRate ) ;
+									  __int64* pTag , long * pDuration , long* pcardClientID , double* pPeakFlowRate ) ;
 
-typedef long (WINAPI *typeSetDeliveryProperties) ( long ID , long HoseID ,short State ,short Type ,double Volume ,short PriceLevel ,
-								   double Price ,double Value ,double Volume2, DATE CompletedDT ,long LockedBy, long ReservedBy , 
-								   long AttendantID , long Age ) ;
+typedef long (WINAPI *typeSetDeliveryProperties) ( long ID , long hoseID ,short state ,short type ,double volume ,short priceLevel ,
+								   double price ,double value ,double volume2, DATE completedDT ,long LockedBy, long ReservedBy , 
+								   long attendantID , long Age ) ;
 
-typedef long (WINAPI *typeSetDeliveryPropertiesEx) ( long ID , long HoseID ,short State ,short Type ,double Volume ,short PriceLevel ,
+typedef long (WINAPI *typeSetDeliveryPropertiesEx) ( long ID , long hoseID ,short State ,short Type ,double Volume ,short priceLevel ,
 									 double Price ,double Value ,double Volume2 , DATE CompletedDT ,long LockedBy, 
-									 long ReservedBy , long AttendantID , long Age , DATE ClearedDT , double VolumeETot , double Volume2ETot , double ValueETot , __int64 Tag ) ;
+									 long ReservedBy , long attendantID , long Age , DATE ClearedDT , double VolumeETot , double Volume2ETot , double ValueETot , __int64 Tag ) ;
 
-typedef long (WINAPI *typeSetDeliveryPropertiesEx2) ( long ID , long HoseID ,short State ,short Type ,double Volume ,short PriceLevel ,
+typedef long (WINAPI *typeSetDeliveryPropertiesEx2) ( long ID , long hoseID ,short State ,short Type ,double Volume ,short priceLevel ,
 									  double Price ,double Value ,double Volume2 , DATE CompletedDT ,long LockedBy, 
-									  long ReservedBy , long AttendantID , long Age , DATE ClearedDT , 
+									  long ReservedBy , long attendantID , long Age , DATE ClearedDT , 
 								      double OldVolumeETot , double OldVolume2ETot , double OldValueETot , 
 								      double NewVolumeETot , double NewVolume2ETot , double NewValueETot , 
 								      __int64 Tag , long Duration ) ;
 
-typedef long (WINAPI *typeSetDeliveryPropertiesEx3) ( long ID , long HoseID ,short State ,short Type ,double Volume ,short PriceLevel ,
+typedef long (WINAPI *typeSetDeliveryPropertiesEx3) ( long ID , long hoseID ,short State ,short Type ,double Volume ,short priceLevel ,
 								      double Price ,double Value ,double Volume2 , DATE CompletedDT ,long LockedBy, 
-								      long ReservedBy , long AttendantID , long Age , DATE ClearedDT , 
+								      long ReservedBy , long attendantID , long Age , DATE ClearedDT , 
 								      double OldVolumeETot , double OldVolume2ETot , double OldValueETot , 
 								      double NewVolumeETot , double NewVolume2ETot , double NewValueETot , 
-								      __int64 Tag , long Duration , long CardClientID ) ; 
+								      __int64 Tag , long Duration , long cardClientID ) ; 
 
-typedef long (WINAPI *typeSetDeliveryPropertiesEx4) ( long ID , long HoseID ,short State ,short Type ,double Volume ,short PriceLevel ,
+typedef long (WINAPI *typeSetDeliveryPropertiesEx4) ( long ID , long hoseID ,short State ,short Type ,double Volume ,short priceLevel ,
 									  double Price ,double Value ,double Volume2 , DATE CompletedDT ,long LockedBy, 
-									  long ReservedBy , long AttendantID , long Age , DATE ClearedDT , 
+									  long ReservedBy , long attendantID , long Age , DATE ClearedDT , 
 									  double OldVolumeETot , double OldVolume2ETot , double OldValueETot , 
 									  double NewVolumeETot , double NewVolume2ETot , double NewValueETot , 
-									  __int64 Tag , long Duration , long CardClientID, double PeakFlowRate ) ;
+									  __int64 Tag , long Duration , long cardClientID, double PeakFlowRate ) ;
 
 typedef long (WINAPI *typeLockDelivery) ( long ID ) ;
 
@@ -469,87 +480,87 @@ typedef long (WINAPI *typeGetAllDeliveriesCount) ( long* pCount )  ;
 
 typedef long (WINAPI *typeGetAllDeliveryByOrdinal) ( long Index , long* pID ) ;
 
-typedef long (WINAPI *typeGetDeliverySummary) ( long ID , long* pHoseID ,long* pHoseNumber, long* pHosePhysicalNumber,
+typedef long (WINAPI *typeGetDeliverySummary) ( long ID , long* phoseID ,long* phoseNumber, long* pHosePhysicalNumber,
 	  							long* pPumpID, long* pPumpNumber, PBSTR  pPumpName,
 								long* pTankID, long* pTankNumber, PBSTR  pTankName,
-								long* pGradeID , long* pGradeNumber, PBSTR  pGradeName, PBSTR  pGradeShortName, PBSTR  pGradeCode,
-							    short* pState ,short* pType ,double* pVolume ,short* pPriceLevel ,
+								long* pGradeID , long* pGradeNumber, PBSTR  pGradeName, PBSTR  pGradeshortName, PBSTR  pGradeCode,
+							    short* pState ,short* pType ,double* pVolume ,short* ppriceLevel ,
 								double* pPrice ,double* pValue ,double* pVolume2 , DATE* pCompletedDT ,long* pLockedBy, 
-								long* pReservedBy , long* pAttendantID , long* pAge ,DATE* pClearedDT ,
+								long* pReservedBy , long* pattendantID , long* pAge ,DATE* pClearedDT ,
 								double* pVolumeETot , double* pVolume2ETot , double* pValueETot , __int64* pTag) ;
 
-typedef long (WINAPI *typeGetDeliverySummaryEx) ( long ID , long* pHoseID ,long* pHoseNumber, long* pHosePhysicalNumber,
+typedef long (WINAPI *typeGetDeliverySummaryEx) ( long ID , long* phoseID ,long* phoseNumber, long* pHosePhysicalNumber,
 	  							long* pPumpID, long* pPumpNumber, PBSTR  pPumpName,
 								long* pTankID, long* pTankNumber, PBSTR  pTankName,
-								long* pGradeID , long* pGradeNumber, PBSTR  pGradeName, PBSTR  pGradeShortName, PBSTR  pGradeCode,
-							    short* pState ,short* pType ,double* pVolume ,short* pPriceLevel ,
+								long* pGradeID , long* pGradeNumber, PBSTR  pGradeName, PBSTR  pGradeshortName, PBSTR  pGradeCode,
+							    short* pState ,short* pType ,double* pVolume ,short* ppriceLevel ,
 		                        double* pPrice ,double* pValue ,double* pVolume2 , DATE* pCompletedDT ,long* pLockedBy, 
-								long* pReservedBy , long* pAttendantID , long* pAge ,DATE* pClearedDT ,
+								long* pReservedBy , long* pattendantID , long* pAge ,DATE* pClearedDT ,
 								double* pOldVolumeETot , double* pOldVolume2ETot , double* pOldValueETot , 
 								double* pNewVolumeETot , double* pNewVolume2ETot , double* pNewValueETot , 
 								__int64* pTag , long * pDuration ) ;
 
-typedef long (WINAPI *typeGetDeliverySummaryEx2) ( long ID , long* pHoseID ,long* pHoseNumber, long* pHosePhysicalNumber,
+typedef long (WINAPI *typeGetDeliverySummaryEx2) ( long ID , long* phoseID ,long* phoseNumber, long* pHosePhysicalNumber,
 	  							long* pPumpID, long* pPumpNumber, PBSTR  pPumpName,
 								long* pTankID, long* pTankNumber, PBSTR  pTankName,
-								long* pGradeID , long* pGradeNumber, PBSTR  pGradeName, PBSTR  pGradeShortName, PBSTR  pGradeCode,
-							    short* pState ,short* pType ,double* pVolume ,short* pPriceLevel ,
+								long* pGradeID , long* pGradeNumber, PBSTR  pGradeName, PBSTR  pGradeshortName, PBSTR  pGradeCode,
+							    short* pState ,short* pType ,double* pVolume ,short* ppriceLevel ,
 		                        double* pPrice ,double* pValue ,double* pVolume2 , DATE* pCompletedDT ,long* pLockedBy, 
-								long* pReservedBy , long* pAttendantID , long* pAge ,DATE* pClearedDT ,
+								long* pReservedBy , long* pattendantID , long* pAge ,DATE* pClearedDT ,
 								double* pOldVolumeETot , double* pOldVolume2ETot , double* pOldValueETot , 
 								double* pNewVolumeETot , double* pNewVolume2ETot , double* pNewValueETot , 
-								__int64* pTag , long * pDuration , long* pAttendantNumber , PBSTR pAttendantName, __int64* pAttendantTag ,
-								long* pCardClientID , long* pCardClientNumber , PBSTR pCardClientName, __int64* pCardClientTag ) ;
+								__int64* pTag , long * pDuration , long* pAttendantNumber , PBSTR pAttendantName, __int64* pattendantTag ,
+								long* pcardClientID , long* pCardClientNumber , PBSTR pCardClientName, __int64* pcardClientTag ) ;
 
-typedef long (WINAPI *typeGetDeliverySummaryEx3) ( long ID , long* pHoseID ,long* pHoseNumber, long* pHosePhysicalNumber,
+typedef long (WINAPI *typeGetDeliverySummaryEx3) ( long ID , long* phoseID ,long* phoseNumber, long* pHosePhysicalNumber,
 	  							long* pPumpID, long* pPumpNumber, PBSTR  pPumpName,
 								long* pTankID, long* pTankNumber, PBSTR  pTankName,
-								long* pGradeID , long* pGradeNumber, PBSTR  pGradeName, PBSTR  pGradeShortName, PBSTR  pGradeCode,
-							    short* pState ,short* pType ,double* pVolume ,short* pPriceLevel ,
+								long* pGradeID , long* pGradeNumber, PBSTR  pGradeName, PBSTR  pGradeshortName, PBSTR  pGradeCode,
+							    short* pState ,short* pType ,double* pVolume ,short* ppriceLevel ,
 		                        double* pPrice ,double* pValue ,double* pVolume2 , DATE* pCompletedDT ,long* pLockedBy, 
-								long* pReservedBy , long* pAttendantID , long* pAge ,DATE* pClearedDT ,
+								long* pReservedBy , long* pattendantID , long* pAge ,DATE* pClearedDT ,
 								double* pOldVolumeETot , double* pOldVolume2ETot , double* pOldValueETot , 
 								double* pNewVolumeETot , double* pNewVolume2ETot , double* pNewValueETot , 
-								__int64* pTag , long * pDuration , long* pAttendantNumber , PBSTR pAttendantName, __int64* pAttendantTag ,
-								long* pCardClientID , long* pCardClientNumber , PBSTR pCardClientName, __int64* pCardClientTag  , double* pPeakFlowRate ) ;
+								__int64* pTag , long * pDuration , long* pAttendantNumber , PBSTR pAttendantName, __int64* pattendantTag ,
+								long* pcardClientID , long* pCardClientNumber , PBSTR pCardClientName, __int64* pcardClientTag  , double* pPeakFlowRate ) ;
 
-typedef long (WINAPI *typeSetDeliveryExt) ( long ID , BSTR Plate , double Odometer , double Odometer2 , BSTR ExtTransactionID , BSTR DriverID , BSTR AuthID, short AuthType ) ;
+typedef long (WINAPI *typeSetDeliveryExt) ( long ID , BSTR plate , double odometer , double odometer2 , BSTR extTransactionID , BSTR driverID , BSTR AuthID, short authType ) ;
 
-typedef long (WINAPI *typeGetDeliveryExt) ( long ID , PBSTR pPlate , double* pOdometer , double* pOdometer2 , PBSTR pExtTransactionID , PBSTR pDriverID , PBSTR pAuthID, short* pAuthType ) ;
+typedef long (WINAPI *typeGetDeliveryExt) ( long ID , PBSTR pplate , double* podometer , double* podometer2 , PBSTR pextTransactionID , PBSTR pdriverID , PBSTR pAuthID, short* pauthType ) ;
 
-typedef long (WINAPI *typeGetPumpDeliveryProperties) ( long ID , short Index , long* pDeliveryID , short* pType , short* pState, long* pHoseID, 
-									   short* pHoseNum, long* pGradeID , PBSTR pGradeName ,PBSTR pShortGradeName, short* pPriceLevel, double* pPrice , double* pVolume , 
-									   double* pValue , long* pLockedBy , long* pReservedBy , long* pAge , DATE* pCompletedDT , long* pAttendantID  ) ;
+typedef long (WINAPI *typeGetPumpDeliveryProperties) ( long ID , short Index , long* pDeliveryID , short* pType , short* pState, long* phoseID, 
+									   short* pHoseNum, long* pGradeID , PBSTR pGradeName ,PBSTR pShortGradeName, short* ppriceLevel, double* pPrice , double* pVolume , 
+									   double* pValue , long* pLockedBy , long* pReservedBy , long* pAge , DATE* pCompletedDT , long* pattendantID  ) ;
 
 typedef long (WINAPI *typeGetPumpDeliveryPropertiesEx) ( long ID , short Index , long* pDeliveryID , short* pType , short* pState, 
-										long* pHoseID, short* pHoseNum, 
+										long* phoseID, short* pHoseNum, 
 										long* pGradeID, PBSTR pGradeName, PBSTR pShortGradeName , 
-								        short* pPriceLevel, double* pPrice , double* pVolume , double* pValue , long* pLockedBy , 
-									    long* pReservedBy , long* pAge , DATE* pCompletedDT , long* pAttendantID , 
+								        short* ppriceLevel, double* pPrice , double* pVolume , double* pValue , long* pLockedBy , 
+									    long* pReservedBy , long* pAge , DATE* pCompletedDT , long* pattendantID , 
 										double* pVolumeETot , double* pVolume2ETot , double* pValueETot , __int64* pTag ) ;
 
-typedef long (WINAPI *typeGetPumpDeliveryPropertiesEx2) ( long ID , short Index , long* pDeliveryID , short* pType , short* pState, long* pHoseID, short* pHoseNum, long* pGradeID, PBSTR pGradeName, PBSTR pShortGradeName , 
-								        short* pPriceLevel, double* pPrice , double* pVolume , double* pValue , long* pLockedBy , 
-									    long* pReservedBy , long* pAge , DATE* pCompletedDT , long* pAttendantID , 
+typedef long (WINAPI *typeGetPumpDeliveryPropertiesEx2) ( long ID , short Index , long* pDeliveryID , short* pType , short* pState, long* phoseID, short* pHoseNum, long* pGradeID, PBSTR pGradeName, PBSTR pShortGradeName , 
+								        short* ppriceLevel, double* pPrice , double* pVolume , double* pValue , long* pLockedBy , 
+									    long* pReservedBy , long* pAge , DATE* pCompletedDT , long* pattendantID , 
 										double* pOldVolumeETot , double* pOldVolume2ETot , double* pOldValueETot , 
 										double* pNewVolumeETot , double* pNewVolume2ETot , double* pNewValueETot , 
 										__int64* pTag , long * pDuration ) ;
 
 typedef long (WINAPI *typeGetPumpDeliveryPropertiesEx3) ( long ID , short Index , long* pDeliveryID , short* pType , short* pState, 
-										 long* pHoseID, short* pHoseNum, 
+										 long* phoseID, short* pHoseNum, 
 										 long* pGradeID, PBSTR pGradeName, PBSTR pShortGradeName , 
-								        short* pPriceLevel, double* pPrice , double* pVolume , double* pValue , long* pLockedBy , 
-									    long* pReservedBy , long* pAge , DATE* pCompletedDT , long* pAttendantID , 
+								        short* ppriceLevel, double* pPrice , double* pVolume , double* pValue , long* pLockedBy , 
+									    long* pReservedBy , long* pAge , DATE* pCompletedDT , long* pattendantID , 
 										double* pOldVolumeETot , double* pOldVolume2ETot , double* pOldValueETot , 
 										double* pNewVolumeETot , double* pNewVolume2ETot , double* pNewValueETot , 
-										__int64* pTag , long * pDuration , long* pCardClientID ) ;
+										__int64* pTag , long * pDuration , long* pcardClientID ) ;
 
-typedef long (WINAPI *typeGetPumpDeliveryPropertiesEx4) ( long ID , short Index , long* pDeliveryID , short* pType , short* pState, long* pHoseID, short* pHoseNum, long* pGradeID, PBSTR pGradeName, PBSTR pShortGradeName , 
-								        short* pPriceLevel, double* pPrice , double* pVolume , double* pValue , long* pLockedBy , 
-									    long* pReservedBy , long* pAge , DATE* pCompletedDT , long* pAttendantID , 
+typedef long (WINAPI *typeGetPumpDeliveryPropertiesEx4) ( long ID , short Index , long* pDeliveryID , short* pType , short* pState, long* phoseID, short* pHoseNum, long* pGradeID, PBSTR pGradeName, PBSTR pShortGradeName , 
+								        short* ppriceLevel, double* pPrice , double* pVolume , double* pValue , long* pLockedBy , 
+									    long* pReservedBy , long* pAge , DATE* pCompletedDT , long* pattendantID , 
 										double* pOldVolumeETot , double* pOldVolume2ETot , double* pOldValueETot , 
 										double* pNewVolumeETot , double* pNewVolume2ETot , double* pNewValueETot , 
-										__int64* pTag , long * pDuration , long* pCardClientID , double* pPeakFlowRate  ) ;
+										__int64* pTag , long * pDuration , long* pcardClientID , double* pPeakFlowRate  ) ;
 
 typedef BSTR (WINAPI *typeReserveTypeString) ( short Type ) ;
 
@@ -593,24 +604,24 @@ typedef long (WINAPI *typeSetHosePropertiesEx2) (long ID , long Number,long Pump
 
 typedef long (WINAPI *typeDeleteHose) ( long ID ) ;
 
-typedef long (WINAPI *typeGetHosePrices) ( long ID , short* pDurationType , short* pPriceType , double* pPrice1 , double* pPrice2 ) ;
+typedef long (WINAPI *typeGetHosePrices) ( long ID , short* pDurationType , short* ppriceType , double* pPrice1 , double* pPrice2 ) ;
 
 typedef long (WINAPI *typeGetHoseSummary) (	long ID , long* pNumber, long* pPhysicalNumber,
 							long* pPumpID, long* pPumpNumber, PBSTR pPumpName,
 							long* pTankID, long* pTankNumber, PBSTR pTankName,
-							long* pGradeID , long* pGradeNumber, PBSTR pGradeName, PBSTR pGradeShortName, PBSTR pGradeCode,
+							long* pGradeID , long* pGradeNumber, PBSTR pGradeName, PBSTR pGradeshortName, PBSTR pGradeCode,
 		                    double* pMtrTheoValue , double* pMtrTheoVolume ,double* pMtrElecValue , double* pMtrElecVolume ) ;
 
 typedef long (WINAPI *typeGetHoseSummaryEx) (	long ID , long* pNumber, long* pPhysicalNumber,
 							long* pPumpID, long* pPumpNumber, PBSTR pPumpName,
 							long* pTankID, long* pTankNumber, PBSTR pTankName,
-							long* pGradeID , long* pGradeNumber, PBSTR pGradeName, PBSTR pGradeShortName, PBSTR pGradeCode,
+							long* pGradeID , long* pGradeNumber, PBSTR pGradeName, PBSTR pGradeshortName, PBSTR pGradeCode,
 		                    double* pMtrTheoValue , double* pMtrTheoVolume ,double* pMtrElecValue , double* pMtrElecVolume ,
 							double* pPrice1 , double* pPrice2 , short* pEnabled) ;
 
 typedef long (WINAPI *typeSetHoseETotals) ( long ID , double Volume , double Value ) ;
 
-typedef long (WINAPI *typeSetHosePrices) ( long ID , short DurationType , short PriceType , double Price1 , double Price2 ) ;
+typedef long (WINAPI *typeSetHosePrices) ( long ID , short DurationType , short priceType , double Price1 , double Price2 ) ;
 
 	//-------------------------------------- Grades ---------------------------------------//
 
@@ -622,13 +633,13 @@ typedef long (WINAPI *typeGetGradeByName) ( BSTR Name , long* pID ) ;
 
 typedef long (WINAPI *typeGetGradeByOrdinal) ( long Index , long* pID ) ;
 
-typedef long (WINAPI *typeGetGradeProperties) (long ID , long* pNumber, PBSTR pName , PBSTR pShortName , PBSTR pCode ) ;
+typedef long (WINAPI *typeGetGradeProperties) (long ID , long* pNumber, PBSTR pName , PBSTR pshortName , PBSTR pCode ) ;
 
-typedef long (WINAPI *typeGetGradePropertiesEx) (long ID , long* pNumber, PBSTR pName , PBSTR pShortName , PBSTR pCode , short* pType ) ;
+typedef long (WINAPI *typeGetGradePropertiesEx) (long ID , long* pNumber, PBSTR pName , PBSTR pshortName , PBSTR pCode , short* pType ) ;
 
-typedef long (WINAPI *typeSetGradeProperties) (long ID , long Number, BSTR Name , BSTR ShortName , BSTR Code  ) ;
+typedef long (WINAPI *typeSetGradeProperties) (long ID , long Number, BSTR Name , BSTR shortName , BSTR Code  ) ;
 
-typedef long (WINAPI *typeSetGradePropertiesEx) (long ID , long Number, BSTR Name , BSTR ShortName , BSTR Code  , short Type ) ;
+typedef long (WINAPI *typeSetGradePropertiesEx) (long ID , long Number, BSTR Name , BSTR shortName , BSTR Code  , short Type ) ;
 
 typedef long (WINAPI *typeDeleteGrade) ( long ID ) ;
 
@@ -665,13 +676,13 @@ typedef long (WINAPI *typeSetTankPropertiesEx) (long ID , long Number, BSTR Name
 typedef long (WINAPI *typeDeleteTank) ( long ID ) ;
 
 typedef long (WINAPI *typeGetTankSummary) (long ID , long* pNumber, PBSTR pName , long* pGradeID , 
-						   long* pGradeNumber, PBSTR pGradeName, PBSTR pGradeShortName, PBSTR pGradeCode, 
+						   long* pGradeNumber, PBSTR pGradeName, PBSTR pGradeshortName, PBSTR pGradeCode, 
 						   short* pType , double* pCapacity , double* pDiameter , 
 						   double* pTheoVolume , double* pGaugeVolume , double* pGaugeTCVolume, double* pGaugeUllage, double* pGaugeTemperature , 
 						   double* pGaugeLevel , double* pGaugeWaterVolume, double* pGaugeWaterLevel, long* pGaugeID, short* pProbeNo ) ;
 
 typedef long (WINAPI *typeGetTankSummaryEx) (long ID , long* pNumber, PBSTR pName , long* pGradeID , 
-						   long* pGradeNumber, PBSTR pGradeName, PBSTR pGradeShortName, PBSTR pGradeCode, 
+						   long* pGradeNumber, PBSTR pGradeName, PBSTR pGradeshortName, PBSTR pGradeCode, 
 						   short* pType , double* pCapacity , double* pDiameter , 
 						   double* pTheoVolume , double* pGaugeVolume , double* pGaugeTCVolume, double* pGaugeUllage, double* pGaugeTemperature , 
 						   double* pGaugeLevel , double* pGaugeWaterVolume, double* pGaugeWaterLevel, long* pGaugeID, short* pProbeNo , 
@@ -713,14 +724,14 @@ typedef long (WINAPI *typeGetAttendantByName) ( BSTR Name , long* pID ) ;
 
 typedef long (WINAPI *typeGetAttendantByOrdinal) ( long Index , long* pID ) ;
 
-typedef long (WINAPI *typeGetAttendantProperties) (long ID , long* pNumber, PBSTR pName , PBSTR pShortName , PBSTR pPassword , PBSTR pTag ) ; 
+typedef long (WINAPI *typeGetAttendantProperties) (long ID , long* pNumber, PBSTR pName , PBSTR pshortName , PBSTR pPassword , PBSTR pTag ) ; 
 
-typedef long (WINAPI *typeSetAttendantProperties) (long ID , long Number, BSTR Name , BSTR ShortName , BSTR Password , BSTR Tag ) ; 
+typedef long (WINAPI *typeSetAttendantProperties) (long ID , long Number, BSTR Name , BSTR shortName , BSTR Password , BSTR Tag ) ; 
 
-typedef long (WINAPI *typeGetAttendantPropertiesEx) (long ID , long* pNumber, PBSTR pName , PBSTR pShortName , PBSTR pPassword , PBSTR pTag , 
+typedef long (WINAPI *typeGetAttendantPropertiesEx) (long ID , long* pNumber, PBSTR pName , PBSTR pshortName , PBSTR pPassword , PBSTR pTag , 
 									 short* pShiftAStart , short* pShiftAEnd , short* pShiftBStart , short* pShiftBEnd , short* pType )  ;
 
-typedef long (WINAPI *typeSetAttendantPropertiesEx) (long ID , long Number, BSTR Name , BSTR ShortName , BSTR Password , BSTR Tag,
+typedef long (WINAPI *typeSetAttendantPropertiesEx) (long ID , long Number, BSTR Name , BSTR shortName , BSTR Password , BSTR Tag,
 									 short ShiftAStart , short ShiftAEnd , short ShiftBStart , short ShiftBEnd , short Type )  ;
 
 typedef long (WINAPI *typeGetAttendantState) ( long ID , short* pType , short* pLoggedOn ) ;
@@ -745,13 +756,14 @@ typedef long (WINAPI *typeGetCardClientProperties) (long ID , long* pNumber, PBS
 
 typedef long (WINAPI *typeSetCardClientProperties) (long ID , long Number, BSTR Name , BSTR Tag , short Enabled )  ;
 
-typedef long (WINAPI *typeGetCardClientPropertiesEx) (long ID , long* pNumber, PBSTR pName , PBSTR pTag , short* pEnabled , short* pPriceLevel, PBSTR pPlate  )  ;
+typedef long (WINAPI *typeGetCardClientPropertiesEx) (long ID , long* pNumber, PBSTR pName , PBSTR pTag , short* pEnabled , short* ppriceLevel, PBSTR pplate  )  ;
 
-typedef long (WINAPI *typeSetCardClientPropertiesEx) (long ID , long Number, BSTR Name , BSTR Tag , short Enabled , short PriceLevel , BSTR Plate ) ;
+typedef long (WINAPI *typeSetCardClientPropertiesEx) (long ID , long Number, BSTR Name , BSTR Tag , short Enabled , short priceLevel , BSTR plate ) ;
 
-typedef long (WINAPI *typeSetCardClientPropertiesEx2) (long ID , long Number, BSTR Name , BSTR Tag , short Enabled , short PriceLevel , BSTR Plate , short GradeType )  ;
+typedef long (WINAPI *typeSetCardClientPropertiesEx2) (long ID , long Number, BSTR Name , BSTR Tag , short Enabled , short priceLevel , BSTR plate , 
+													   short gradeType, short cardType, short limitType, double limit, short entryType, DATE expirationDate, long parentID )  ;
 
-typedef long (WINAPI *typeGetCardClientPropertiesEx2) (long ID , long* pNumber, PBSTR pName , PBSTR pTag , short* pEnabled , short* pPriceLevel , PBSTR pPlate , short* pGradeType)  ;
+typedef long (WINAPI *typeGetCardClientPropertiesEx2) (long ID , long* pNumber, PBSTR pName , PBSTR pTag , short* pEnabled , short* ppriceLevel , PBSTR pplate , short* pgradeType)  ;
 
 typedef long (WINAPI *typeDeleteCardClient) ( long ID ) ;
 
@@ -825,9 +837,9 @@ typedef long (WINAPI *typeSetLogEventProperties) (long ID , short DeviceType , l
 
 typedef long (WINAPI *typeDeleteLogEvent) ( long ID ) ;
 
-typedef long (WINAPI *typeClearLogEvent) ( long ID  , long ClientID ) ;
+typedef long (WINAPI *typeClearLogEvent) ( long ID  , long clientID ) ;
 
-typedef long (WINAPI *typeAckLogEvent) ( long ID  , long ClientID ) ;
+typedef long (WINAPI *typeAckLogEvent) ( long ID  , long clientID ) ;
 
 class CEZClient
 {
@@ -841,8 +853,6 @@ public:
 	bool isLoaded();
 
 	void GetLastErrorText(DWORD erro, LPTSTR lpszBuffer, DWORD dwSize);
-	char KBget();
-	int  KBhit();
 
 protected:
 	bool	dllLoaded;
@@ -855,7 +865,7 @@ protected:
 #endif
 
 //-----------------------------------------------------------------------------
-public:  // Declaracao dos ponteiros de pontos de entrada
+public:  // Declaring Points of Entry Pointers
 	typeDllVersion							DllVersion;
 	typeServerVersion						ServerVersion;
 	typeClientLogon							ClientLogon;
@@ -999,6 +1009,7 @@ public:  // Declaracao dos ponteiros de pontos de entrada
 	typeGetCardClientByOrdinal				GetCardClientByOrdinal;
 	typeGetCardClientProperties				GetCardClientProperties;
 	typeSetCardClientProperties				SetCardClientProperties;
+	typeSetCardClientPropertiesEx2			SetCardClientPropertiesEx2;
 	typeDeleteCardClient					DeleteCardClient;
 	typeAllStop								AllStop;
 	typeAllAuthorise						AllAuthorise;
@@ -1053,7 +1064,13 @@ public:  // Declaracao dos ponteiros de pontos de entrada
 	typeGetNextZB2GStatusEvent				GetNextZB2GStatusEvent;
 	typeGetNextLogEventEvent				GetNextLogEventEvent;
 	typeGetNextDBTankStatusEventEx2			GetNextDBTankStatusEventEx2;
-	//typeIsValidMACLicense					IsValidMACLicense;
+	typePaymentAuthorise					PaymentAuthorise;
+	typePaymentReserve						PaymentReserve;
+	typeGetSensorsCount						GetSensorsCount;
+	typeGetSensorByOrdinal					GetSensorByOrdinal;
+	typeGetSensorProperties					GetSensorProperties;
+	typeSetGradePropertiesEx				SetGradePropertiesEx;
+	typeSetTankPropertiesEx					SetTankPropertiesEx;
 };
 
 //-----------------------------------------------------------------------------

@@ -4,7 +4,8 @@
  * Copyright (C) 2009-2012 EZTech Tecnologia e Automação Ltda.
  * All rights reserved.
  *
- * Created 01/06/2010
+ *	Created     : 08/2012
+ *  Updated		: 07/2017
  *
  * File: Definitions.h
  * Desc: Public definitions header file
@@ -12,17 +13,16 @@
  * Visual SourceSafe details
  * =========================
  *
- * $Header: /EZController.root/EZController/COMMON/Definitions.h 1     17/04/07 13:55 Kelvin Ussher $
+ * $Header: /EZController.root/EZController/COMMON/Definitions.h
  * $History: Definitions.h $
- *
- * *****************  Version 1  *****************
- * User: Kelvin Ussher Date: 17/04/11   Time: 13:55
- * Created in $/EZController.root/EZController/COMMON
- *
  *
  ******************************************************************/
 
-#define NULL_ID 0xFFFFFFFF
+#define NULL_ID				0xFFFFFFFF
+#define NOBODY				-1
+#define ALLGRADE			0
+#define NO_ENTRY_TYPE		1
+#define	USB1				1
 
 enum EClients
 {
@@ -35,10 +35,22 @@ enum EClients
 typedef enum TClientType
 {
 	SIMPLE_CLIENT_TYPE = 0x00 ,
-	CALLS_CLIENT_TYPE = 0x01 ,
-	EVENTS_CLIENT_TYPE = 0x02 ,
-	DB_CLIENT_TYPE = 0x04
+	CLIENT_TYPE_CALL = 0x01 ,
+	CLIENT_TYPE_EVENTS = 0x02 ,
+	CLIENT_TYPE_DB = 0x04 ,
+	CLIENT_TYPE_ALL = 0x07
 } TClientType ;
+
+typedef enum TLicenseType
+{
+	EZSERVER_LICENSE_MASK = 0x01 ,
+	EZHO_LICENSE_MASK = 0x02 ,
+	ZIGBEE_LICENSE_MASK = 0x04 ,
+	EZMONITOR_LICENSE_MASK = 0x08 ,
+	TANK_MANAGEMENT_LICENSE_MASK = 0x10 ,
+	DEVELOPMENT_LICENSE_MASK = 0x20 ,
+	XPERT_LICENSE_MASK = 0x40
+} TLicenseType ;
 
 typedef enum TObjectType
 {
@@ -112,8 +124,17 @@ typedef enum TPumpReserve
 	AUTHED_FOR_PREAUTH ,
 	RESERVED_FOR_CTF ,
 	AUTHED_FOR_CTF
-
 } TPumpReserve ;
+
+typedef enum TCardType
+{
+	VEHICLE_CARD_TYPE = 1 ,
+	ATTENDANT_CARD_TYPE  ,
+	DRIVER_CARD_TYPE ,
+	SECONDARY_VEHICLE_CARD_TYPE ,
+	SECONDARY_ATTENDANT_CARD_TYPE ,
+	SECONDARY_DRIVER_CARD_TYPE
+} TCardType ;
 
 typedef enum TDisplayFormat
 {
@@ -199,6 +220,13 @@ typedef enum TDeliveryLogState
 	LOGGED_LSTATE ,
 	CLEARED_LSTATE
 } TDeliveryLogState ;
+
+typedef enum TAttendantType
+{
+	BLOCKED_ATTSTATE ,
+	ENABLED_ATTSTATE ,
+	LOG_ON_OFF_ATTSTATE = 3
+} TAttendantType ;
 
 typedef enum TDeviceType
 {
@@ -318,7 +346,7 @@ typedef enum TResult
 	INVALID_INTERFACE_RESULT,							// 04
 	INVALID_EVENTS_SOCKET_RESULT,						// 05
 	INVALID_OBJECT_LINK_RESULT ,						// 06
-	INVALID_OBJECT_PARAMETER_RESULT ,					// 07	// new
+	INVALID_OBJECT_PARAMETER_RESULT ,					// 07
 	NOT_LOGGED_ON_RESULT ,								// 08
 	ALREADY_LOGGED_ON_RESULT ,							// 09
 	INVALID_LOGON_RESULT ,								// 10
@@ -334,7 +362,7 @@ typedef enum TResult
 	INVALID_HOSE_MASK_RESULT ,							// 20
 	PUMP_NOT_RESERVED_FOR_PREAUTH_RESULT ,				// 21
 	PREPAYS_NOT_PREMITTED_RESULT ,						// 22
-	PREAUTHS_NOT_PREMITTED_RESULT ,						// 23		// new
+	PREAUTHS_NOT_PREMITTED_RESULT ,						// 23
 	PUMP_CANNOT_BE_AUTHED_RESULT ,						// 24
 	PUMP_NOT_AUTHED_RESULT ,							// 25
 	NO_DELIVERY_AVAILABLE_RESULT ,						// 26
@@ -365,10 +393,10 @@ typedef enum TResult
 	CTF_NOT_PREMITTED_RESULT ,							// 51
 	PUMP_NOT_RESERVED_FOR_CTF_RESULT ,					// 52
 	ZIGBEE_MODULE_TYPE_ERROR_RESULT ,					// 53
-	LAST_RESULT											// 54		// must be last
+	LAST_RESULT											// 54
 } TResult ;
 
-typedef enum TPresetType
+typedef enum TpresetType
 {
 	INVALID_PRESET_TYPE = 0 ,
 	NO_PRESET_TYPE ,
@@ -378,7 +406,7 @@ typedef enum TPresetType
 	VOLUME_PREPAY_TYPE ,
 	DOLLAR_PREAUTH_TYPE ,
 	VOLUME_PREAUTH_TYPE
-} TPresetType ;
+} TpresetType ;
 
 typedef enum TPumpState
 {										// EZForecourt - PAM100       - CBC
@@ -421,7 +449,6 @@ typedef enum
 	UNKNOWN_TAG_TYPE
 } TTagType ;
 
-//#if !defined(_LINUX_)
 #if defined(_WIN32)
 
 typedef long (__cdecl *TDriverEntry) (void* );
@@ -458,13 +485,13 @@ typedef enum THose
 	ALL_HOSES	= 0xFF
 } THose ;
 
-typedef enum TAllocLimitType
+typedef enum TAlloclimitType
 {
 	INVALID_LIMIT_TYPE = 0 ,
 	NO_LIMIT_TYPE ,
 	DOLLAR_LIMIT_TYPE ,
 	VOLUME_LIMIT_TYPE
-} TAllocLimitType  ;
+} TAlloclimitType  ;
 
 typedef enum TClientEvent
 {
@@ -497,13 +524,27 @@ typedef enum TClientEvent
 
 typedef enum TTankType
 {
+	TANK_HI_PRODUCT_ALARM_BIT		= 0x01,
+	TANK_HI_PRODUCT_WARNING_BIT		= 0x02,
+	TANK_LOW_PRODUCT_ALARM_BIT		= 0x04,
+	TANK_LOW_PRODUCT_WARNING_BIT	= 0x08,
+	TANK_HI_WATER_ALARM_BIT			= 0x10,
+	TANK_HI_WATER_WARNING_BIT		= 0x20,
+	TANK_RESPONDING_BIT				= 0x40,
+	TANK_DROP_BIT					= 0x80,
+	TANK_LEAK_BIT					= 0x100,
+	TANK_CONFIG_BIT					= 0x200,
+	ATG_RESPONDING_BIT				= 0x400,
+	TANK_CALIBRATION_ERROR_BIT		= 0x800
+} TTankType ;
+
+typedef enum TAlarmsMask
+{
 	INVALID_TANK_TYPE = 0 ,
 	MANUAL_DIP_TANK_TYPE ,
 	GAUGED_TANK_TYPE
-} TTankType ;
+} TAlarmsMask ;
 
-
-//#ifdef _LINUX_
 #if defined(__linux__)
 #define NO_ZB_ADDRESS 0xFFFFFFFFFFFFFFFFLLU
 #else
