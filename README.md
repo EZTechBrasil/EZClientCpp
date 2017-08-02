@@ -1,78 +1,50 @@
-- Introdução ( Msg de boas vindas )
-- Arquitetura dos Sistemas de Hardware ( Fazer Diagramas )
-	- Kit de Integração
-	- EZForecourt USB **
-	- EZForecourt Plus **
-	- EZForecourt Plus 2GS *
-	- Vision *
-	- EZRemote
-	- EZRemote 2G
-- QuickStart
-	- Pacote de Instalação ( Passo a Passo ) **
-	- EZMonitor *
-	- EZSim *
-- www.integracao.com
+# EZClient.cpp #
 
+This project aims to assist partners in integrating with the EZTech service, using the APIs in a simple and practical way to serve as an example for a new integration.
 
+# Installation #
 
-# Introdução
-========
-<a href="http://www.freeimages.com"> <img src="http://www.freeimages.com/assets/183410/1834094233/business-graphics-1428645-m.jpg" align="left" hspace="10" vspace="0"></a>
+To install the EZClient.cpp project follow these steps:
 
-Seja bem vindo a família **EZTech**, sua presença é muito importante para nós e estamos felizes por ter vocês conosco, juntos estaremos construindo um novo futuro, agradecemos pela confiança em nós depositada. Muito obrigado, estamos a sua disposição para ajudá-lo em suas necessidades, e temos certeza de que corresponderemos a parceria e desenvolveremos um ótimo trabalho conjunto. O objetivo é organizar e acelerar este processo de integração e envolver o seu desenvolvimento em conjunto.
+## Step 1 - Clone or Download Project:
+[![CloneProject](https://github.com/EZTechBrasil/EZClientCpp/blob/Eric/Pictures/clone-repo-clone-url-button.png)](https://help.github.com/articles/cloning-a-repository/)
 
-Buscaremos oferecer o que há de melhor em nossos conteúdos, estamos certos que todos os nossos objetivos serão alcançados, muitas novidades estarão sendo oferecidas. Não deixe de explorar e conhecer a fundo nossos produtos, contamos com a sua parceria.
+## Step 2 - Requirements for execution:
+[![Stdio.h](https://img.shields.io/badge/stdio-release-green.svg)](https://sourceforge.net/p/mingw/mingw-org-wsl/ci/21762bb4a1bd0c88c38eead03f59e8d994349e83/tree/include/stdio.h)
+[![Stdlib.h](https://img.shields.io/badge/stdlib-release-green.svg)](https://www.tutorialspoint.com/c_standard_library/stdlib_h.htm)
+[![Signal.h](https://img.shields.io/badge/signal-release-green.svg)](http://www.uniriotec.br/~morganna/guia/libc/cs_signal.html)
+[![String.h](https://img.shields.io/badge/string-release-green.svg)](https://www.tutorialspoint.com/c_standard_library/string_h.htm)
 
-# Arquitetura dos Sistemas de Hardware
-========
+## Win32
+[![Conio.h](https://img.shields.io/badge/conio-release-green.svg)](http://equipe.nce.ufrj.br/adriano/c/apostila/funcoes/conio.html)
+[![Windows.h](https://img.shields.io/badge/windows-release-green.svg)](https://pt.stackoverflow.com/questions/16495/biblioteca-windows-h-o-que-me-permite-realizar)
+[![Tchar.h](https://img.shields.io/badge/tchar-release-green.svg)](https://sourceforge.net/p/mingw/mingw-org-wsl/ci/4.0.0/tree/include/tchar.h)
 
-[ FLUXOGRAMA ]
+## Linux
+[![Unistd.h](https://img.shields.io/badge/unistd-release-green.svg)](http://pubs.opengroup.org/onlinepubs/7908799/xsh/unistd.h.html)
+[![Termios.h](https://img.shields.io/badge/termios-release-green.svg)](http://pubs.opengroup.org/onlinepubs/7908799/xsh/termios.h.html)
 
-## Kit de Integração
-========
-<a href="https://www.tutorialspoint.com"> <img src="https://www.tutorialspoint.com/data_communication_computer_network/images/client_server.jpg" align="left" hspace="10" vspace="0"></a>
+[![Sys/ioctl.h](https://img.shields.io/badge/ioctl-release-green.svg)](http://unix.superglobalmegacorp.com/Net2/newsrc/sys/ioctl.h.html)
+[![Sys/types.h](https://img.shields.io/badge/types-release-green.svg)](http://pubs.opengroup.org/onlinepubs/009696699/basedefs/sys/types.h.html)
+[![Sys/prctl.h](https://img.shields.io/badge/prctl-release-green.svg)](http://man7.org/linux/man-pages/man2/prctl.2.html)
+[![Sys/signal.h](https://img.shields.io/badge/signal-release-green.svg)](http://unix.superglobalmegacorp.com/Net2/newsrc/sys/signal.h.html)
 
-Seguindo o conceito de **Cliente - Servidor(em inglês client/server model)**, o **EZServer** disponibiliza suas **API's** para acesso via biblioteca **EZClient.dll** onde vários clientes simultaneamente podem manipular dados contidos dentro do **EZServer**. Toda essa manipulação de dados é monitorada e registrada no BD do **EZServer**, esteja ele dentro de um **EZForecourt** ou dentro de um microcomputador.
+## Step 3 - Installing a virtual simulator with manual or automatic deliveries:
 
-Algumas características básica do **EZServer** são:
+[![Quickstart Manual](https://github.com/EZTechBrasil/EZClientCpp/blob/Eric/Pictures/QUICKSTART%20MANUAL.png)](https://github.com/EZTechBrasil/Integracao/raw/master/downloads/INTEGRATION_KIT_QUICKSTART_MANUAL.pdf)
 
-* Sempre espera por um pedido de um cliente;
-* Atende os pedidos e, em seguida, responde aos clientes com os dados solicitados;
-* Pode se comunicar com outros servidores para atender uma solicitação específica do cliente;
-* Garante a integridade dos dados entregue;
+[![Automatic Simulator](https://github.com/EZTechBrasil/EZClientCpp/blob/Eric/Pictures/AUTOMATIC%20SIMULATOR.png)](https://github.com/EZTechBrasil/Integracao/raw/master/downloads/AUTOMATIC_SIMULATOR.pdf)
 
-===
-<a href="http://icons.iconarchive.com"> <img src="http://icons.iconarchive.com/icons/enhancedlabs/longhorn-pinstripe/128/dll-icon.png" align="right" hspace="10" vspace="0"></a>
+## Step 4 - Configuring and Running
 
-**Dynamic-link library (biblioteca de vínculo dinâmico)** ou **DLL**, é a implementação feita pela **Microsoft** para o conceito de bibliotecas compartilhadas nos sistemas operacionais **Microsoft Windows e OS/2**. Essas bibliotecas geralmente tem as extensões **DLL** ou **OCX** (para bibliotecas que contêm controles ActiveX).
+Open the source code of the project and change the IP address to access the EZServer according to your needs.
+[![EZClientCppConfigAdress](https://github.com/EZTechBrasil/EZClientCpp/blob/Eric/Pictures/EZClientCppConfigAdress.png)](https://github.com/EZTechBrasil/EZClientCpp/blob/Eric/Pictures/EZClientCppConfigAdress.png)
 
-A **EZClient.dll** fornecerá as funções reconhecidas pelo **EZServer** e fará a ligação entre o servidor e o cliente, garantindo a requisição dos dados da forma correta e a segurança do serviço.
+Run the application and see it consuming the EZServer information.
+[![EZClientCpp](https://github.com/EZTechBrasil/EZClientCpp/blob/Eric/Pictures/EZClientCpp.png)](https://github.com/EZTechBrasil/EZClientCpp/blob/Eric/Pictures/EZClientCpp.png)
 
-===
-<a href="https://d1avok0lzls2w.cloudfront.net"> <img src="https://d1avok0lzls2w.cloudfront.net/img_uploads/apis-for-marketers.png" align="left" hspace="10" vspace="0"></a>
+## API Reference
 
-**Interface de Programação de Aplicação** (português brasileiro), cujo acrónimo API provém do *Inglês Application Programming Interface*, é um conjunto de rotinas e padrões estabelecidos por um software para a utilização das suas funcionalidades por aplicativos que não pretendem envolver-se em detalhes da implementação do software, mas apenas usar seus serviços.
+For more details on APIs, download the development manual.
 
-De modo geral, a **API** é composta por uma série de funções acessíveis somente por programação, e que permitem utilizar características do software menos evidentes ao utilizador tradicional.
-
-Com essa camada podemos garantir o acesso do cliente ao **EZServer** de forma segura, o cliente irá consultar a **Client.dll** ou **ocx** e essa se encarregará levar a requisição do cliente para o **EZServer**.
-
-# EZClientCpp
-========
-<a href="http://ap.imagensbrasil.org"> <img src="http://ap.imagensbrasil.org/images/2017/01/26/EZClientCpp.md.png" align="left" hspace="10" vspace="0"></a>
-Programa de exemplo cliente que se conecta ao **EZServer**, usado como referência para novas integrações. É um tipo de cliente Bronze e possui exemplos de:
-
-* Tipo de Cliente Ativo ( Comum ) ou Passivo ( Por Evento ) ;
-* Leitura de Abastecimentos ;
-* Leitura de Configuração da Bomba ;
-* Troca de Preço da Bomba ;
-* Autorização e Bloqueio da Bomba ;
-* Leitura de Encerrantes ;
-* Leitura de Cartões ;
-* Leitura de Tanques ;
-* Setando valor fixo de Abastecimento ;
-
-Requirements
-------------
-* EZClient.dll compatível com a versão do programa de exemplo. Atualmente 2.3.0.1 ou maior ;
-* 
+[![Quickstart Manual](https://github.com/EZTechBrasil/EZClientCpp/blob/Eric/Pictures/Developer.png)](http://www.execweb.com.br/eztech/EZAdmin/downloads/ManualDesenvolvimento.pdf)
