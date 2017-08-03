@@ -1,6 +1,6 @@
 # EZClient.cpp #
 
-This project aims to assist partners in integrating with the EZTech service, using the APIs in a simple and practical way to serve as an example for a new integration.
+This project aims to assist partners in integrating with the EZTech service, using the APIs in a simple and practical way to serve as an example for a new integration. 
 
 # Installation #
 
