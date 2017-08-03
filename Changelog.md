@@ -18,3 +18,5 @@ All notable changes to this project will be documented in this file.
 - First version of the project
 
 [2.0.0.0]: https://github.com/EZTechBrasil/EZClientCSharp/tree/bf28688fbf0f96751a050b0385be6f9aa370ca6d
+
+[2.1.0.0]: https://github.com/EZTechBrasil/EZClientCpp/tree/2.1.0.0
