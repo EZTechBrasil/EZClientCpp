@@ -10,25 +10,12 @@
 //
 //  Description   : Class for library loading and access EZClient.dll
 //
-//	Parameters  :
-//
-//		EZClientCpp [/s addrEZServer] [/e]
-//
-//			/s : Passes the server's network address (default localhost)
-//			/e : Processes communication by events (default by pooling)
 //
 //  Comments :
 //
 //		*. To compile with GCC in Windows environment and the installation is necessary
 //			of the MinGW package (http://www.mingw.org/)
 //
-//		*. To compile with GCC for Windows or Linux use the Makefile script
-//			use the following commands:
-//
-//				> make clean      (Clean old objects)
-//				> make libinstall (Install libraries, Linux only)
-//				> make linux      (Linux 32bits platform)
-//				> make windows    (WIN32 platform)
 //
 //-----------------------------------------------------------------------------
 

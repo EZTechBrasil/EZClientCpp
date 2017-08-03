@@ -10,49 +10,17 @@
 //
 //  Description   : Class for library loading and access EZClient.dll
 //
-//	Parameters  :
-//
-//		EZClientCpp [/s addrEZServer] [/e]
-//
-//			/s : Passes the server's network address (default localhost)
-//			/e : Processes communication by events (default by pooling)
 //
 //  Comments :
 //
 //		*. To compile with GCC in Windows environment and the installation is necessary
-//			of the MinGW package (http://www.mingw.org/)
-//
-//		*. To compile with GCC for Windows or Linux use the Makefile script
-//			use the following commands:
-//
-//				> make clean      (Clean old objects)
-//				> make libinstall (Install libraries, Linux only)
-//				> make linux      (Linux 32bits platform)
-//				> make windows    (WIN32 platform)
+//			of the MinGW package (http://www.mingw.org/)			
 //
 //-----------------------------------------------------------------------------
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <signal.h>
-#include <string.h>
-
 #if defined(_WIN32)
 
-#include <conio.h>
-#include <windows.h>
-#include <time.h>
 #include <atlcomtime.h>
-
-#elif defined(__linux__)
-
-#include <unistd.h>
-#include <termios.h>
-
-#include <sys/ioctl.h>
-#include <sys/types.h>
-#include <sys/prctl.h>
-#include <sys/signal.h>
 
 #endif
 
@@ -396,15 +364,10 @@ void CheckServerVersion()
 
 #if defined( _WIN32 )
     BSTR   ezserverVersion = NULL ;
-#elif defined( __linux__ )
-    BSTR   ezserverVersion[MAX_PATH] ;
 #endif
 
 #if defined( _WIN32 )
 	if( ! GoodResult( EZInterface.ServerVersion( &ezserverVersion ) ) ) 
-		return ;
-#elif defined( __linux__ )
-	if( ! GoodResult( EZInterface.ServerVersion( MakeBSTR( ezserverVersion, sizeof( ezserverVersion ) / sizeof( wchar_t ) ) ) ) ) 
 		return ;
 #endif
 
@@ -758,11 +721,6 @@ void PumpsStatus()
 	BSTR    currentHose ;
 	BSTR    deliveriesCount ;
 
-#elif defined( __linux__ )
-	BSTR    pumpstates[MAX_PATH] ;
-	BSTR    currentHose[MAX_PATH] ;
-	BSTR    deliveriesCount[MAX_PATH] ;
-
 #endif
 
 	long    pumpsCount ;
@@ -779,12 +737,6 @@ void PumpsStatus()
 	// Read the status of all configured pumps
 #if defined(_WIN32)
 	  if( !GoodResult( EZInterface.GetAllPumpStatuses( &pumpStatuses, &currentHose, &deliveriesCount ) ) )
-
-#elif defined(__linux__)
-	  if( !GoodResult( EZInterface.GetAllPumpStatuses(
-										  MakeBSTR( pumpstates,      sizeof(pumpstates) / sizeof(wchar_t) ),
-										  MakeBSTR( currentHose,     sizeof(currentHose) / sizeof(wchar_t) ),
-										  MakeBSTR( deliveriesCount, sizeof(deliveriesCount)/sizeof(wchar_t)) ) ) )
 #endif
 		  return;
 
@@ -938,19 +890,6 @@ void ScheduledDelivery()
 	BSTR	password = NULL ;
 	BSTR	tag = NULL ;
 
-#elif defined( __linux__ )
-	BSTR    termHash [MAX_PATH] ;
-	BSTR    plate [MAX_PATH] ;
-	BSTR    extTransactionID [MAX_PATH] ;
-	BSTR	driverID [MAX_PATH] ;
-	BSTR	authorisation [MAX_PATH] ;
-
-	// GetAttendantProperties
-	BSTR	name [MAX_PATH] ;
-	BSTR	shortName [MAX_PATH] ;
-	BSTR	password [MAX_PATH] ;
-	BSTR	tag [MAX_PATH] ;
-
 #endif
 
 	WriteMessage( "\n In this example we will make an authorization with a choice of pump, attendant, price and limit." ) ;
@@ -973,15 +912,6 @@ void ScheduledDelivery()
 #if defined( _WIN32 )
 	if( !GoodResult( EZInterface.GetAttendantPropertiesEx(	attendantID, &attendantNumber, &name, &shortName, &password, 
 															&tag, &shiftAStart, &shiftAEnd, &shiftBStart, &shiftBEnd, &attendantType ) ) )
-		return ;
-
-#elif defined( __linux__ )
-	if( !GoodResult( EZInterface.GetAttendantPropertiesEx(	attendantID, &attendantNumber, 
-															MakeBSTR( name, sizeof( name ) / sizeof(wchar_t) ), 
-															MakeBSTR( shortName, sizeof( shortName ) / sizeof(wchar_t) ), 
-															MakeBSTR( password, sizeof( password ) / sizeof(wchar_t) ), 
-															MakeBSTR( tag, sizeof( tag ) / sizeof(wchar_t) ),
-															&shiftAStart, &shiftAEnd, &shiftBStart, shiftBEnd, attendantType ) ) )
 		return ;
 
 #endif
@@ -1007,20 +937,6 @@ void ScheduledDelivery()
 													priceLevel, price, presetType, value,
 													hose, odometer, odometer2, plate,
 													extTransactionID, driverID, authorisation ) ) )
-		return ;
-
-#elif defined( __linux__ )
-	if( !GoodResult( EZInterface.PaymentAuthorise(	pumpID, termID, 
-													MakeBSTR( termHash, sizeof( termHash ) / sizeof(wchar_t) ),
-													attendantID,
-													attendantTag, cardClientID, cardClientTag,
-													authType, extTag, gradeType, priceType,
-													priceLevel, price, presetType, value,
-													hose, odometer, odometer2, 
-													MakeBSTR( plate, sizeof( plate ) / sizeof(wchar_t) ),
-													MakeBSTR( extTransactionID, sizeof( extTransactionID ) / sizeof(wchar_t) ),
-													MakeBSTR( driverID, sizeof( driverID ) / sizeof(wchar_t) ),
-													MakeBSTR( authorisation, sizeof( authorisation ) / sizeof(wchar_t) ) )
 		return ;
 
 #endif
@@ -1213,9 +1129,6 @@ void ReadingCards()
 #if defined( _WIN32 )
 	BSTR    cardName ;
 
-#elif defined( __linux__ )
-	BSTR    cardName[MAX_PATH] ;
-
 #endif
 
 	if( !GoodResult( EZInterface.GetCardReadsCount( &cardCount ) ) )
@@ -1233,11 +1146,6 @@ void ReadingCards()
 															&cardType, &parentID, &tag, &timeStamp ) ) )
 			return ;
 
-#elif defined( __linux__ )
-		if( GoodResult( EZInterface.GetCardReadProperties(	cardID, &cardNumber, 
-															MakeBSTR( cardName, sizeof( cardName ) / sizeof(wchar_t) ), 
-															&pumpID, &cardType, &parentID, &tag, &timeStamp ) ) )
-			return ;
 #endif
 
 		oleTimeStamp = new COleDateTime( timeStamp ) ;
@@ -1444,9 +1352,6 @@ void ClientRegistration()
 #if defined( _WIN32 )
 	BSTR	plate = NULL ;
 
-#elif defined( __linux__ )
-	BSTR    plate[MAX_PATH] = NULL ;
-
 #endif
 
 	WriteMessage( "\n Enter the client number: " ) ;
@@ -1570,9 +1475,6 @@ void TankReading()
 #if defined(_WIN32)
 	BSTR	tankName ;
 
-#elif defined(__linux__)
-	BSTR	tankName[MAX_PATH] ;
-
 #endif
 
 	if( !GoodResult( EZInterface.GetTanksCount( &tankCount ) ) )
@@ -1594,14 +1496,6 @@ void TankReading()
 																&gaugeLevel,		&gaugeWaterVolume,	&gaugeWaterLevel,	
 																&gaugeID,			&probeNo,			&gaugeAlarmsMask		) ) )
 
-#elif defined( __linux__ )
-		if( GoodResult( EZInterface.GetTankPropertiesEx(		tankID,				&tankNumber,		
-																MakeBSTR( tankName, sizeof( tankName ) / sizeof(wchar_t) ), 
-																&gradeID,			&type,				&capacity,			
-																&diameter,			&theoVolume,		&gaugeVolume,		
-																&gaugeTCvolume,		&gaugeUllage,		&gaugeTemperature,	
-																&gaugeLevel,		&gaugeWaterVolume,	&gaugeWaterLevel,	
-																&gaugeID,			&probeNo,			&gaugeAlarmsMask		) ) )
 #endif
 
 		WriteMessage("\n\n\tTankID: %d   TankNumber: %d  TankName: %S ",
@@ -1637,9 +1531,6 @@ void MonitoringSensor()
 #if defined(_WIN32)
 	BSTR	sensorName ;
 
-#elif defined(__linux__)
-	BSTR	sensorName[MAX_PATH] ;
-
 #endif
 
 	if( !GoodResult( EZInterface.GetSensorsCount( &sensorCount ) ) )
@@ -1658,11 +1549,6 @@ void MonitoringSensor()
 																&portID,			&sensorType,		&sensorAddress,			
 																&sensorNo		) ) )
 
-#elif defined( __linux__ )
-		if( GoodResult( EZInterface.GetSensorProperties(		sensorID,			&sensorNumber,		
-																MakeBSTR( sensorName, sizeof( sensorName ) / sizeof(wchar_t) ),
-																&portID,			&sensorType,		&sensorAddress,			
-																&sensorNo		) ) )
 #endif
 
 		WriteMessage("\n\n\t SensorID: %d   SensorNumber: %d  SensorName: %S ",
