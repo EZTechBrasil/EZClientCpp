@@ -32,7 +32,8 @@ The options are adapted to the tests required to complete the integration.
 
 ## Step 5 - Homologation Test
 
-[![HomologationTest](https://github.com/EZTechBrasil/EZClientCpp/blob/master/Pictures/IntegrationHomologation.png)](https://github.com/EZTechBrasil/EZClientCpp/blob/master/Pictures/EZClientCppMain.png)
+After completing the implementation make the tests defined in the homologation worksheet.
+[![HomologationTest](https://github.com/EZTechBrasil/EZClientCpp/blob/master/Pictures/IntegrationHomologation.png)](https://github.com/EZTechBrasil/Integracao/raw/master/downloads/HomologacaoDeIntegracaoV1_5.xlsx)
 
 ## API Reference
 
