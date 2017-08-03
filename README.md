@@ -28,7 +28,11 @@ Open the source code of the project and choice the IP address to access the EZSe
 )
 
 The options are adapted to the tests required to complete the integration.
-[![EZClientCpp](https://github.com/EZTechBrasil/EZClientCpp/blob/master/Pictures/EZClientCppMain.png)](https://github.com/EZTechBrasil/EZClientCpp/blob/master/Pictures/EZClientCppMain.png)
+[![EZClientCppMain](https://github.com/EZTechBrasil/EZClientCpp/blob/master/Pictures/EZClientCppMain.png)](https://github.com/EZTechBrasil/EZClientCpp/blob/master/Pictures/EZClientCppMain.png)
+
+## Step 5 - Homologation Test
+
+[![HomologationTest](https://github.com/EZTechBrasil/EZClientCpp/blob/master/Pictures/IntegrationHomologation.png)](https://github.com/EZTechBrasil/EZClientCpp/blob/master/Pictures/EZClientCppMain.png)
 
 ## API Reference
 
