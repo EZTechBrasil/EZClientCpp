@@ -246,7 +246,7 @@ char ShowMenu( int menuLevel )
 	WriteMessage( "\n\nSelect Option Test: ") ;
 
 	fflush(stdin);
-	scanf ("%c", &chosenType ) ;
+	scanf ("\n%c", &chosenType ) ;
 	system("cls") ;	
 
 	return chosenType;
