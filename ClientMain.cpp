@@ -214,6 +214,7 @@ char ShowMenu( int menuLevel )
 			WriteMessage( "\n\n Which functionality do you want to test?") ;
 			WriteMessage( "\n\t	A - Attendant Registration") ;
 			WriteMessage( "\n\t	B - Delete Attendant") ;	
+			WriteMessage( "\n\t	C - Change of Attendant's time");
 			break ;
 
 		case REGISTER_CLIENT_MENU: 
@@ -1187,6 +1188,9 @@ void RegisterAttendant()
 		case 'B': case 'b':
 			DeleteAttendant() ;
 			break ;
+		case 'C': case 'c':
+			ChangeAttendantTime();
+			break;
 		default:
 			WriteMessage("\n Unknown command!") ;
 	}
@@ -1199,10 +1203,10 @@ void AttendantRegistration()
 	long	attendantID ;
 	long	newAttendantID = 0 ;
 	long	attendantNumber ;	
-	long	shiftAStart ;
-	long	shiftAEnd ;
-	long	shiftBStart ;
-	long	shiftBEnd ;
+	short	shiftAStart ;
+	short	shiftAEnd ;
+	short	shiftBStart ;
+	short	shiftBEnd ;
 	short	attendantType = ENABLED_ATTSTATE ;
 	char	attendantName[MAX_PATH] ;
 	char	attendantShortName[MAX_PATH] ;
@@ -1299,6 +1303,71 @@ void DeleteAttendant()
 
 	WriteMessage( "\n Attendant delete successfully" ) ;
 
+	EndMessage() ;
+}
+
+void ChangeAttendantTime()
+{
+	 //GetAttendantProperties
+	long	attendantNumber;
+	long	attendantID;
+	short	shiftAStart;
+	short	shiftAEnd;
+	short	shiftBStart;
+	short	shiftBEnd;
+	short	attendantType;
+	BSTR	attedantName = NULL;
+	BSTR	attendantShortName = NULL;
+	BSTR	attendantPassword = NULL;
+	BSTR	attedantTag = NULL;
+	
+
+	WriteMessage( "\n Enter the Attendant Number you want change: " ) ;
+	fflush( stdin ) ;
+    scanf ("%d", &attendantNumber ) ;
+
+	if (!GoodResult(EZInterface.GetAttendantByNumber(attendantNumber, &attendantID)))
+		return;	
+
+	if (!GoodResult(EZInterface.GetAttendantPropertiesEx(attendantID, &attendantNumber, &attedantName,
+		&attendantShortName, &attendantPassword, &attedantTag,
+		&shiftAStart, &shiftAEnd, &shiftBStart,
+		&shiftBEnd, &attendantType)))
+		return;
+	
+	WriteMessage( "\n Enter the new ShiftAStart[0 - 1439]: " ) ;
+    fflush( stdin ) ;
+    scanf ("%hu", &shiftAStart ) ;
+
+	WriteMessage( "\n Enter the new ShiftAEnd[0 - 1439]: " ) ;
+    fflush( stdin ) ;
+    scanf ("%hu", &shiftAEnd ) ;
+
+	WriteMessage( "\n Enter the  new ShiftBStart[0 - 1439]: " ) ;
+    fflush( stdin ) ;
+    scanf ("%hu", &shiftBStart ) ;
+
+	WriteMessage( "\n Enter the new ShiftBEnd[0 - 1439]: " ) ;
+    fflush( stdin ) ;
+    scanf ("%hu", &shiftBEnd ) ;
+
+	
+	if (GoodResult(EZInterface.SetAttendantPropertiesEx(attendantID, attendantNumber, attedantName,
+		attendantShortName, attendantPassword, attedantTag,
+		(short) shiftAStart, (short)shiftAEnd, (short)shiftBStart, (short)shiftBEnd, attendantType)))
+	{
+		WriteMessage("\n The time changed successfully");
+	}
+	else
+	{
+		WriteMessage("\n The time cannot to be changed.");
+	}
+	
+	FREE_SYS_STR(attedantName);
+	FREE_SYS_STR(attendantShortName);
+	FREE_SYS_STR(attendantPassword);
+	FREE_SYS_STR(attedantTag);
+	
 	EndMessage() ;
 }
 

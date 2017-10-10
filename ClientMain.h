@@ -117,6 +117,7 @@ void RegisterAttendant() ;
 
 void AttendantRegistration() ;
 void DeleteAttendant() ;
+void ChangeAttendantTime();
 
 // Register Client
 void RegisterClient() ;
